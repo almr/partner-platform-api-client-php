@@ -29,8 +29,5 @@
     },
     "autoload": {
         "psr-4": { "Emesa\\PartnerPlatform\\" : "lib/" }
-    },
-    "autoload-dev": {
-        "psr-4": { "Emesa\\PartnerPlatform\\" : "test/" }
     }
 }
