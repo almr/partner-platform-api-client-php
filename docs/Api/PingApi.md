@@ -1,6 +1,6 @@
 # Emesa\PartnerPlatform\PingApi
 
-All URIs are relative to *https://selp469.test.market.emesa.org/*
+All URIs are relative to *https://market.emesa.org/*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------

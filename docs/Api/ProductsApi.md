@@ -1,19 +1,19 @@
 # Emesa\PartnerPlatform\ProductsApi
 
-All URIs are relative to *https://selp469.test.market.emesa.org/*
+All URIs are relative to *https://market.emesa.org/*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getOffer**](ProductsApi.md#getoffer) | **GET** /supplier-api/v1/products/{id}/offer | 
-[**getProduct**](ProductsApi.md#getproduct) | **GET** /supplier-api/v1/products/{id} | 
-[**listProducts**](ProductsApi.md#listproducts) | **GET** /supplier-api/v1/products | 
-[**putOffer**](ProductsApi.md#putoffer) | **PUT** /supplier-api/v1/products/{id}/offer | 
-[**putProduct**](ProductsApi.md#putproduct) | **PUT** /supplier-api/v1/products/{id} | 
+[**getOffer**](ProductsApi.md#getoffer) | **GET** /supplier-api/v1/products/{supplierProductId}/offer | Get current offer for a product
+[**getProduct**](ProductsApi.md#getproduct) | **GET** /supplier-api/v1/products/{supplierProductId} | Get product
+[**listProducts**](ProductsApi.md#listproducts) | **GET** /supplier-api/v1/products | List products
+[**putOffer**](ProductsApi.md#putoffer) | **PUT** /supplier-api/v1/products/{supplierProductId}/offer | Create or update an offer on a product
+[**putProduct**](ProductsApi.md#putproduct) | **PUT** /supplier-api/v1/products/{supplierProductId} | Create or update product
 
 # **getOffer**
-> \Emesa\PartnerPlatform\Model\ProductOfferDto getOffer($id)
+> \Emesa\PartnerPlatform\Model\ProductOfferDto getOffer($supplier_product_id)
 
-
+Get current offer for a product
 
 ### Example
 ```php
@@ -32,10 +32,10 @@ $apiInstance = new Emesa\PartnerPlatform\Api\ProductsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$id = "id_example"; // string | 
+$supplier_product_id = "supplier_product_id_example"; // string | 
 
 try {
-    $result = $apiInstance->getOffer($id);
+    $result = $apiInstance->getOffer($supplier_product_id);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling ProductsApi->getOffer: ', $e->getMessage(), PHP_EOL;
@@ -47,7 +47,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **string**|  |
+ **supplier_product_id** | **string**|  |
 
 ### Return type
 
@@ -65,9 +65,11 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **getProduct**
-> \Emesa\PartnerPlatform\Model\ProductDto getProduct($id)
+> \Emesa\PartnerPlatform\Model\ProductDto getProduct($supplier_product_id)
 
+Get product
 
+Get previously created product.
 
 ### Example
 ```php
@@ -86,10 +88,10 @@ $apiInstance = new Emesa\PartnerPlatform\Api\ProductsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$id = "id_example"; // string | 
+$supplier_product_id = "supplier_product_id_example"; // string | 
 
 try {
-    $result = $apiInstance->getProduct($id);
+    $result = $apiInstance->getProduct($supplier_product_id);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling ProductsApi->getProduct: ', $e->getMessage(), PHP_EOL;
@@ -101,7 +103,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **string**|  |
+ **supplier_product_id** | **string**|  |
 
 ### Return type
 
@@ -121,7 +123,9 @@ Name | Type | Description  | Notes
 # **listProducts**
 > \Emesa\PartnerPlatform\Model\ProductList listProducts($limit, $offset)
 
+List products
 
+List previously created products.
 
 ### Example
 ```php
@@ -141,7 +145,7 @@ $apiInstance = new Emesa\PartnerPlatform\Api\ProductsApi(
     $config
 );
 $limit = 1000; // int | Maximum number of entities to return
-$offset = 56; // int | Skip first N items
+$offset = 0; // int | Skip first N items
 
 try {
     $result = $apiInstance->listProducts($limit, $offset);
@@ -157,7 +161,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **limit** | **int**| Maximum number of entities to return | [optional] [default to 1000]
- **offset** | **int**| Skip first N items | [optional]
+ **offset** | **int**| Skip first N items | [optional] [default to 0]
 
 ### Return type
 
@@ -175,9 +179,11 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **putOffer**
-> putOffer($id, $body)
+> putOffer($supplier_product_id, $body)
 
+Create or update an offer on a product
 
+If an offer for this product already exists, it is updated.
 
 ### Example
 ```php
@@ -196,11 +202,11 @@ $apiInstance = new Emesa\PartnerPlatform\Api\ProductsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$id = "id_example"; // string | 
-$body = new \Emesa\PartnerPlatform\Model\PutOfferRequest(); // \Emesa\PartnerPlatform\Model\PutOfferRequest | Input data
+$supplier_product_id = "supplier_product_id_example"; // string | 
+$body = new \Emesa\PartnerPlatform\Model\ProductOfferDto(); // \Emesa\PartnerPlatform\Model\ProductOfferDto | Input data
 
 try {
-    $apiInstance->putOffer($id, $body);
+    $apiInstance->putOffer($supplier_product_id, $body);
 } catch (Exception $e) {
     echo 'Exception when calling ProductsApi->putOffer: ', $e->getMessage(), PHP_EOL;
 }
@@ -211,8 +217,8 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **string**|  |
- **body** | [**\Emesa\PartnerPlatform\Model\PutOfferRequest**](../Model/PutOfferRequest.md)| Input data | [optional]
+ **supplier_product_id** | **string**|  |
+ **body** | [**\Emesa\PartnerPlatform\Model\ProductOfferDto**](../Model/ProductOfferDto.md)| Input data | [optional]
 
 ### Return type
 
@@ -225,14 +231,16 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **putProduct**
-> putProduct($id, $body)
+> putProduct($supplier_product_id, $body)
 
+Create or update product
 
+If a product with the same Supplier Product ID already exists, it is updated.
 
 ### Example
 ```php
@@ -251,11 +259,11 @@ $apiInstance = new Emesa\PartnerPlatform\Api\ProductsApi(
     new GuzzleHttp\Client(),
     $config
 );
-$id = "id_example"; // string | 
+$supplier_product_id = "supplier_product_id_example"; // string | 
 $body = new \Emesa\PartnerPlatform\Model\PutProductRequest(); // \Emesa\PartnerPlatform\Model\PutProductRequest | Input data
 
 try {
-    $apiInstance->putProduct($id, $body);
+    $apiInstance->putProduct($supplier_product_id, $body);
 } catch (Exception $e) {
     echo 'Exception when calling ProductsApi->putProduct: ', $e->getMessage(), PHP_EOL;
 }
@@ -266,7 +274,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **string**|  |
+ **supplier_product_id** | **string**|  |
  **body** | [**\Emesa\PartnerPlatform\Model\PutProductRequest**](../Model/PutProductRequest.md)| Input data | [optional]
 
 ### Return type
@@ -280,7 +288,7 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 

@@ -1,11 +1,11 @@
 # Emesa\PartnerPlatform\DictionaryApi
 
-All URIs are relative to *https://selp469.test.market.emesa.org/*
+All URIs are relative to *https://market.emesa.org/*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**listCategories**](DictionaryApi.md#listcategories) | **GET** /supplier-api/v1/categories | 
-[**listShippingClassifications**](DictionaryApi.md#listshippingclassifications) | **GET** /supplier-api/v1/shipping-classifications | 
+[**listShippingClasses**](DictionaryApi.md#listshippingclasses) | **GET** /supplier-api/v1/shipping-classes | 
 
 # **listCategories**
 > \Emesa\PartnerPlatform\Model\CategoryList listCategories($limit, $offset)
@@ -30,7 +30,7 @@ $apiInstance = new Emesa\PartnerPlatform\Api\DictionaryApi(
     $config
 );
 $limit = 10000; // int | Maximum number of entities to return
-$offset = 56; // int | Skip first N items
+$offset = 0; // int | Skip first N items
 
 try {
     $result = $apiInstance->listCategories($limit, $offset);
@@ -46,7 +46,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **limit** | **int**| Maximum number of entities to return | [optional] [default to 10000]
- **offset** | **int**| Skip first N items | [optional]
+ **offset** | **int**| Skip first N items | [optional] [default to 0]
 
 ### Return type
 
@@ -63,8 +63,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
-# **listShippingClassifications**
-> \Emesa\PartnerPlatform\Model\ShippingClassificationDto[] listShippingClassifications()
+# **listShippingClasses**
+> \Emesa\PartnerPlatform\Model\ShippingClassDto[] listShippingClasses()
 
 
 
@@ -87,10 +87,10 @@ $apiInstance = new Emesa\PartnerPlatform\Api\DictionaryApi(
 );
 
 try {
-    $result = $apiInstance->listShippingClassifications();
+    $result = $apiInstance->listShippingClasses();
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling DictionaryApi->listShippingClassifications: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling DictionaryApi->listShippingClasses: ', $e->getMessage(), PHP_EOL;
 }
 ?>
 ```
@@ -100,7 +100,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**\Emesa\PartnerPlatform\Model\ShippingClassificationDto[]**](../Model/ShippingClassificationDto.md)
+[**\Emesa\PartnerPlatform\Model\ShippingClassDto[]**](../Model/ShippingClassDto.md)
 
 ### Authorization
 
