@@ -57,7 +57,7 @@ class ProductOfferDto implements ModelInterface, ArrayAccess
       */
     protected static $swaggerTypes = [
         'stock' => 'int',
-'target_price' => 'int',
+'target_price_in_cents' => 'int',
 'market_shipping_class_id' => 'string'    ];
 
     /**
@@ -67,7 +67,7 @@ class ProductOfferDto implements ModelInterface, ArrayAccess
       */
     protected static $swaggerFormats = [
         'stock' => null,
-'target_price' => null,
+'target_price_in_cents' => null,
 'market_shipping_class_id' => null    ];
 
     /**
@@ -98,7 +98,7 @@ class ProductOfferDto implements ModelInterface, ArrayAccess
      */
     protected static $attributeMap = [
         'stock' => 'stock',
-'target_price' => 'targetPrice',
+'target_price_in_cents' => 'targetPriceInCents',
 'market_shipping_class_id' => 'marketShippingClassId'    ];
 
     /**
@@ -108,7 +108,7 @@ class ProductOfferDto implements ModelInterface, ArrayAccess
      */
     protected static $setters = [
         'stock' => 'setStock',
-'target_price' => 'setTargetPrice',
+'target_price_in_cents' => 'setTargetPriceInCents',
 'market_shipping_class_id' => 'setMarketShippingClassId'    ];
 
     /**
@@ -118,7 +118,7 @@ class ProductOfferDto implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'stock' => 'getStock',
-'target_price' => 'getTargetPrice',
+'target_price_in_cents' => 'getTargetPriceInCents',
 'market_shipping_class_id' => 'getMarketShippingClassId'    ];
 
     /**
@@ -201,7 +201,7 @@ self::MARKET_SHIPPING_CLASS_ID_SPEC_3,        ];
     public function __construct(array $data = null)
     {
         $this->container['stock'] = isset($data['stock']) ? $data['stock'] : null;
-        $this->container['target_price'] = isset($data['target_price']) ? $data['target_price'] : null;
+        $this->container['target_price_in_cents'] = isset($data['target_price_in_cents']) ? $data['target_price_in_cents'] : null;
         $this->container['market_shipping_class_id'] = isset($data['market_shipping_class_id']) ? $data['market_shipping_class_id'] : null;
     }
 
@@ -217,8 +217,8 @@ self::MARKET_SHIPPING_CLASS_ID_SPEC_3,        ];
         if ($this->container['stock'] === null) {
             $invalidProperties[] = "'stock' can't be null";
         }
-        if ($this->container['target_price'] === null) {
-            $invalidProperties[] = "'target_price' can't be null";
+        if ($this->container['target_price_in_cents'] === null) {
+            $invalidProperties[] = "'target_price_in_cents' can't be null";
         }
         if ($this->container['market_shipping_class_id'] === null) {
             $invalidProperties[] = "'market_shipping_class_id' can't be null";
@@ -271,25 +271,25 @@ self::MARKET_SHIPPING_CLASS_ID_SPEC_3,        ];
     }
 
     /**
-     * Gets target_price
+     * Gets target_price_in_cents
      *
      * @return int
      */
-    public function getTargetPrice()
+    public function getTargetPriceInCents()
     {
-        return $this->container['target_price'];
+        return $this->container['target_price_in_cents'];
     }
 
     /**
-     * Sets target_price
+     * Sets target_price_in_cents
      *
-     * @param int $target_price target_price
+     * @param int $target_price_in_cents target_price_in_cents
      *
      * @return $this
      */
-    public function setTargetPrice($target_price)
+    public function setTargetPriceInCents($target_price_in_cents)
     {
-        $this->container['target_price'] = $target_price;
+        $this->container['target_price_in_cents'] = $target_price_in_cents;
 
         return $this;
     }

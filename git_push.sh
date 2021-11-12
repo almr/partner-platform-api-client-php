@@ -1,4 +1,8 @@
-#!/bin/sh
+#!/bin/bash
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+cd $DIR
+
 # ref: https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line/
 #
 # Usage example: /bin/sh ./git_push.sh wing328 swagger-petstore-perl "minor update"
@@ -7,13 +11,16 @@ git_user_id=$1
 git_repo_id=$2
 release_note=$3
 
+#there is a bug that is fixed but not yet added to the docker image https://github.com/swagger-api/swagger-codegen/pull/11175/files
+git_repo_base_url=github
+
 if [ "$git_user_id" = "" ]; then
-    git_user_id="emesa-dev"
+    git_user_id="GIT_USER_ID"
     echo "[INFO] No command line input provided. Set \$git_user_id to $git_user_id"
 fi
 
 if [ "$git_repo_id" = "" ]; then
-    git_repo_id="partner-platform-api-client-php"
+    git_repo_id="GIT_REPO_ID"
     echo "[INFO] No command line input provided. Set \$git_repo_id to $git_repo_id"
 fi
 
@@ -22,8 +29,6 @@ if [ "$release_note" = "" ]; then
     echo "[INFO] No command line input provided. Set \$release_note to $release_note"
 fi
 
-# Initialize the local directory as a Git repository
-git init
 
 # Adds the files in the local repository and stages them for commit.
 git add .
@@ -44,7 +49,7 @@ if [ "$git_remote" = "" ]; then # git remote not defined
 
 fi
 
-git pull origin master
+git pull --set-upstream origin master
 
 # Pushes (Forces) the changes in the local repository up to the remote repository
 echo "Git pushing to https://${git_repo_base_url}.com/${git_user_id}/${git_repo_id}.git"
