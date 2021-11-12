@@ -6,7 +6,7 @@ cd $DIR
 # ref: https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line/
 # Usage example: /bin/sh ./git_push.sh "minor update"
 
-release_note=$3
+release_note=$1
 
 if [ "$release_note" = "" ]; then
     release_note="Minor update"
