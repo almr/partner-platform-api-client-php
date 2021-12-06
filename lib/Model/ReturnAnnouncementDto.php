@@ -57,6 +57,7 @@ class ReturnAnnouncementDto implements ModelInterface, ArrayAccess
       */
     protected static $swaggerTypes = [
         'market_rma_id' => 'string',
+'market_order_id' => 'string',
 'track_trace_number' => 'string',
 'return_reason' => 'string',
 'customer_comment' => 'string',
@@ -70,6 +71,7 @@ class ReturnAnnouncementDto implements ModelInterface, ArrayAccess
       */
     protected static $swaggerFormats = [
         'market_rma_id' => null,
+'market_order_id' => null,
 'track_trace_number' => null,
 'return_reason' => null,
 'customer_comment' => null,
@@ -104,6 +106,7 @@ class ReturnAnnouncementDto implements ModelInterface, ArrayAccess
      */
     protected static $attributeMap = [
         'market_rma_id' => 'marketRmaId',
+'market_order_id' => 'marketOrderId',
 'track_trace_number' => 'trackTraceNumber',
 'return_reason' => 'returnReason',
 'customer_comment' => 'customerComment',
@@ -117,6 +120,7 @@ class ReturnAnnouncementDto implements ModelInterface, ArrayAccess
      */
     protected static $setters = [
         'market_rma_id' => 'setMarketRmaId',
+'market_order_id' => 'setMarketOrderId',
 'track_trace_number' => 'setTrackTraceNumber',
 'return_reason' => 'setReturnReason',
 'customer_comment' => 'setCustomerComment',
@@ -130,6 +134,7 @@ class ReturnAnnouncementDto implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'market_rma_id' => 'getMarketRmaId',
+'market_order_id' => 'getMarketOrderId',
 'track_trace_number' => 'getTrackTraceNumber',
 'return_reason' => 'getReturnReason',
 'customer_comment' => 'getCustomerComment',
@@ -220,6 +225,7 @@ self::RETURN_REASON_RETURNED_BY_CARRIER,        ];
     public function __construct(array $data = null)
     {
         $this->container['market_rma_id'] = isset($data['market_rma_id']) ? $data['market_rma_id'] : null;
+        $this->container['market_order_id'] = isset($data['market_order_id']) ? $data['market_order_id'] : null;
         $this->container['track_trace_number'] = isset($data['track_trace_number']) ? $data['track_trace_number'] : null;
         $this->container['return_reason'] = isset($data['return_reason']) ? $data['return_reason'] : null;
         $this->container['customer_comment'] = isset($data['customer_comment']) ? $data['customer_comment'] : null;
@@ -285,6 +291,30 @@ self::RETURN_REASON_RETURNED_BY_CARRIER,        ];
     public function setMarketRmaId($market_rma_id)
     {
         $this->container['market_rma_id'] = $market_rma_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets market_order_id
+     *
+     * @return string
+     */
+    public function getMarketOrderId()
+    {
+        return $this->container['market_order_id'];
+    }
+
+    /**
+     * Sets market_order_id
+     *
+     * @param string $market_order_id market_order_id
+     *
+     * @return $this
+     */
+    public function setMarketOrderId($market_order_id)
+    {
+        $this->container['market_order_id'] = $market_order_id;
 
         return $this;
     }
