@@ -87,6 +87,570 @@ class ReturnsApi
     }
 
     /**
+     * Operation getReturnAnnouncement
+     *
+     * Get return announcement
+     *
+     * @param  string $market_rma_id market_rma_id (required)
+     *
+     * @throws \Emesa\PartnerPlatform\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Emesa\PartnerPlatform\Model\ReturnAnnouncementDto
+     */
+    public function getReturnAnnouncement($market_rma_id)
+    {
+        list($response) = $this->getReturnAnnouncementWithHttpInfo($market_rma_id);
+        return $response;
+    }
+
+    /**
+     * Operation getReturnAnnouncementWithHttpInfo
+     *
+     * Get return announcement
+     *
+     * @param  string $market_rma_id (required)
+     *
+     * @throws \Emesa\PartnerPlatform\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Emesa\PartnerPlatform\Model\ReturnAnnouncementDto, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getReturnAnnouncementWithHttpInfo($market_rma_id)
+    {
+        $returnType = '\Emesa\PartnerPlatform\Model\ReturnAnnouncementDto';
+        $request = $this->getReturnAnnouncementRequest($market_rma_id);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if (!in_array($returnType, ['string','integer','bool'])) {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Emesa\PartnerPlatform\Model\ReturnAnnouncementDto',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Emesa\PartnerPlatform\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getReturnAnnouncementAsync
+     *
+     * Get return announcement
+     *
+     * @param  string $market_rma_id (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getReturnAnnouncementAsync($market_rma_id)
+    {
+        return $this->getReturnAnnouncementAsyncWithHttpInfo($market_rma_id)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getReturnAnnouncementAsyncWithHttpInfo
+     *
+     * Get return announcement
+     *
+     * @param  string $market_rma_id (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getReturnAnnouncementAsyncWithHttpInfo($market_rma_id)
+    {
+        $returnType = '\Emesa\PartnerPlatform\Model\ReturnAnnouncementDto';
+        $request = $this->getReturnAnnouncementRequest($market_rma_id);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getReturnAnnouncement'
+     *
+     * @param  string $market_rma_id (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function getReturnAnnouncementRequest($market_rma_id)
+    {
+        // verify the required parameter 'market_rma_id' is set
+        if ($market_rma_id === null || (is_array($market_rma_id) && count($market_rma_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $market_rma_id when calling getReturnAnnouncement'
+            );
+        }
+
+        $resourcePath = '/supplier-api/v1/return-announcements/{marketRmaId}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+        // path params
+        if ($market_rma_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'marketRmaId' . '}',
+                ObjectSerializer::toPathValue($market_rma_id),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                []
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+            // // this endpoint requires Bearer token
+            if ($this->config->getAccessToken() !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+            }
+        // this endpoint requires OAuth (access token)
+        if ($this->config->getAccessToken() !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation listReturnAnnouncements
+     *
+     * List of returns announcements
+     *
+     * @param  \DateTime $since since (optional)
+     * @param  int $limit Maximum number of entities to return (optional, default to 100)
+     * @param  int $offset Skip first N items (optional, default to 0)
+     *
+     * @throws \Emesa\PartnerPlatform\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Emesa\PartnerPlatform\Model\ReturnAnnouncementsList
+     */
+    public function listReturnAnnouncements($since = null, $limit = '100', $offset = '0')
+    {
+        list($response) = $this->listReturnAnnouncementsWithHttpInfo($since, $limit, $offset);
+        return $response;
+    }
+
+    /**
+     * Operation listReturnAnnouncementsWithHttpInfo
+     *
+     * List of returns announcements
+     *
+     * @param  \DateTime $since (optional)
+     * @param  int $limit Maximum number of entities to return (optional, default to 100)
+     * @param  int $offset Skip first N items (optional, default to 0)
+     *
+     * @throws \Emesa\PartnerPlatform\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Emesa\PartnerPlatform\Model\ReturnAnnouncementsList, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function listReturnAnnouncementsWithHttpInfo($since = null, $limit = '100', $offset = '0')
+    {
+        $returnType = '\Emesa\PartnerPlatform\Model\ReturnAnnouncementsList';
+        $request = $this->listReturnAnnouncementsRequest($since, $limit, $offset);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if (!in_array($returnType, ['string','integer','bool'])) {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Emesa\PartnerPlatform\Model\ReturnAnnouncementsList',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 422:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Emesa\PartnerPlatform\Model\ValidationError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation listReturnAnnouncementsAsync
+     *
+     * List of returns announcements
+     *
+     * @param  \DateTime $since (optional)
+     * @param  int $limit Maximum number of entities to return (optional, default to 100)
+     * @param  int $offset Skip first N items (optional, default to 0)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function listReturnAnnouncementsAsync($since = null, $limit = '100', $offset = '0')
+    {
+        return $this->listReturnAnnouncementsAsyncWithHttpInfo($since, $limit, $offset)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation listReturnAnnouncementsAsyncWithHttpInfo
+     *
+     * List of returns announcements
+     *
+     * @param  \DateTime $since (optional)
+     * @param  int $limit Maximum number of entities to return (optional, default to 100)
+     * @param  int $offset Skip first N items (optional, default to 0)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function listReturnAnnouncementsAsyncWithHttpInfo($since = null, $limit = '100', $offset = '0')
+    {
+        $returnType = '\Emesa\PartnerPlatform\Model\ReturnAnnouncementsList';
+        $request = $this->listReturnAnnouncementsRequest($since, $limit, $offset);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'listReturnAnnouncements'
+     *
+     * @param  \DateTime $since (optional)
+     * @param  int $limit Maximum number of entities to return (optional, default to 100)
+     * @param  int $offset Skip first N items (optional, default to 0)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function listReturnAnnouncementsRequest($since = null, $limit = '100', $offset = '0')
+    {
+
+        $resourcePath = '/supplier-api/v1/return-announcements';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($since !== null) {
+            $queryParams['since'] = ObjectSerializer::toQueryValue($since, 'date-time');
+        }
+        // query params
+        if ($limit !== null) {
+            $queryParams['limit'] = ObjectSerializer::toQueryValue($limit, null);
+        }
+        // query params
+        if ($offset !== null) {
+            $queryParams['offset'] = ObjectSerializer::toQueryValue($offset, null);
+        }
+
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                []
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+            // // this endpoint requires Bearer token
+            if ($this->config->getAccessToken() !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+            }
+        // this endpoint requires OAuth (access token)
+        if ($this->config->getAccessToken() !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation listReturns
      *
      * @param  string $market_order_id market_order_id (required)
