@@ -27,6 +27,8 @@
  */
 
 namespace Emesa\PartnerPlatform\Model;
+
+use \ArrayAccess;
 use \Emesa\PartnerPlatform\ObjectSerializer;
 
 /**
@@ -37,7 +39,7 @@ use \Emesa\PartnerPlatform\ObjectSerializer;
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class ValidationError extends Error 
+class ValidationError implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -54,7 +56,8 @@ class ValidationError extends Error
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'violations' => '\Emesa\PartnerPlatform\Model\ValidationField[]'    ];
+        'code' => 'int',
+'message' => 'string'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -62,7 +65,8 @@ class ValidationError extends Error
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'violations' => null    ];
+        'code' => null,
+'message' => null    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -71,7 +75,7 @@ class ValidationError extends Error
      */
     public static function swaggerTypes()
     {
-        return self::$swaggerTypes + parent::swaggerTypes();
+        return self::$swaggerTypes;
     }
 
     /**
@@ -81,7 +85,7 @@ class ValidationError extends Error
      */
     public static function swaggerFormats()
     {
-        return self::$swaggerFormats + parent::swaggerFormats();
+        return self::$swaggerFormats;
     }
 
     /**
@@ -91,7 +95,8 @@ class ValidationError extends Error
      * @var string[]
      */
     protected static $attributeMap = [
-        'violations' => 'violations'    ];
+        'code' => 'code',
+'message' => 'message'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -99,7 +104,8 @@ class ValidationError extends Error
      * @var string[]
      */
     protected static $setters = [
-        'violations' => 'setViolations'    ];
+        'code' => 'setCode',
+'message' => 'setMessage'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -107,7 +113,8 @@ class ValidationError extends Error
      * @var string[]
      */
     protected static $getters = [
-        'violations' => 'getViolations'    ];
+        'code' => 'getCode',
+'message' => 'getMessage'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -117,7 +124,7 @@ class ValidationError extends Error
      */
     public static function attributeMap()
     {
-        return parent::attributeMap() + self::$attributeMap;
+        return self::$attributeMap;
     }
 
     /**
@@ -127,7 +134,7 @@ class ValidationError extends Error
      */
     public static function setters()
     {
-        return parent::setters() + self::$setters;
+        return self::$setters;
     }
 
     /**
@@ -137,7 +144,7 @@ class ValidationError extends Error
      */
     public static function getters()
     {
-        return parent::getters() + self::$getters;
+        return self::$getters;
     }
 
     /**
@@ -152,6 +159,12 @@ class ValidationError extends Error
 
     
 
+    /**
+     * Associative array for storing property values
+     *
+     * @var mixed[]
+     */
+    protected $container = [];
 
     /**
      * Constructor
@@ -161,9 +174,8 @@ class ValidationError extends Error
      */
     public function __construct(array $data = null)
     {
-        parent::__construct($data);
-
-        $this->container['violations'] = isset($data['violations']) ? $data['violations'] : null;
+        $this->container['code'] = isset($data['code']) ? $data['code'] : null;
+        $this->container['message'] = isset($data['message']) ? $data['message'] : null;
     }
 
     /**
@@ -173,10 +185,13 @@ class ValidationError extends Error
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = parent::listInvalidProperties();
+        $invalidProperties = [];
 
-        if ($this->container['violations'] === null) {
-            $invalidProperties[] = "'violations' can't be null";
+        if ($this->container['code'] === null) {
+            $invalidProperties[] = "'code' can't be null";
+        }
+        if ($this->container['message'] === null) {
+            $invalidProperties[] = "'message' can't be null";
         }
         return $invalidProperties;
     }
@@ -194,25 +209,49 @@ class ValidationError extends Error
 
 
     /**
-     * Gets violations
+     * Gets code
      *
-     * @return \Emesa\PartnerPlatform\Model\ValidationField[]
+     * @return int
      */
-    public function getViolations()
+    public function getCode()
     {
-        return $this->container['violations'];
+        return $this->container['code'];
     }
 
     /**
-     * Sets violations
+     * Sets code
      *
-     * @param \Emesa\PartnerPlatform\Model\ValidationField[] $violations List of violations
+     * @param int $code Application error code
      *
      * @return $this
      */
-    public function setViolations($violations)
+    public function setCode($code)
     {
-        $this->container['violations'] = $violations;
+        $this->container['code'] = $code;
+
+        return $this;
+    }
+
+    /**
+     * Gets message
+     *
+     * @return string
+     */
+    public function getMessage()
+    {
+        return $this->container['message'];
+    }
+
+    /**
+     * Sets message
+     *
+     * @param string $message Error description
+     *
+     * @return $this
+     */
+    public function setMessage($message)
+    {
+        $this->container['message'] = $message;
 
         return $this;
     }

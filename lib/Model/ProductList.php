@@ -27,6 +27,8 @@
  */
 
 namespace Emesa\PartnerPlatform\Model;
+
+use \ArrayAccess;
 use \Emesa\PartnerPlatform\ObjectSerializer;
 
 /**
@@ -37,7 +39,7 @@ use \Emesa\PartnerPlatform\ObjectSerializer;
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class ProductList extends OffsetPaginatedResponseDto 
+class ProductList implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -54,7 +56,10 @@ class ProductList extends OffsetPaginatedResponseDto
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'data' => '\Emesa\PartnerPlatform\Model\ProductDto[]'    ];
+        'offset' => 'int',
+'data' => 'object[]',
+'limit' => 'int',
+'total' => 'int'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -62,7 +67,10 @@ class ProductList extends OffsetPaginatedResponseDto
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'data' => null    ];
+        'offset' => null,
+'data' => null,
+'limit' => null,
+'total' => null    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -71,7 +79,7 @@ class ProductList extends OffsetPaginatedResponseDto
      */
     public static function swaggerTypes()
     {
-        return self::$swaggerTypes + parent::swaggerTypes();
+        return self::$swaggerTypes;
     }
 
     /**
@@ -81,7 +89,7 @@ class ProductList extends OffsetPaginatedResponseDto
      */
     public static function swaggerFormats()
     {
-        return self::$swaggerFormats + parent::swaggerFormats();
+        return self::$swaggerFormats;
     }
 
     /**
@@ -91,7 +99,10 @@ class ProductList extends OffsetPaginatedResponseDto
      * @var string[]
      */
     protected static $attributeMap = [
-        'data' => 'data'    ];
+        'offset' => 'offset',
+'data' => 'data',
+'limit' => 'limit',
+'total' => 'total'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -99,7 +110,10 @@ class ProductList extends OffsetPaginatedResponseDto
      * @var string[]
      */
     protected static $setters = [
-        'data' => 'setData'    ];
+        'offset' => 'setOffset',
+'data' => 'setData',
+'limit' => 'setLimit',
+'total' => 'setTotal'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -107,7 +121,10 @@ class ProductList extends OffsetPaginatedResponseDto
      * @var string[]
      */
     protected static $getters = [
-        'data' => 'getData'    ];
+        'offset' => 'getOffset',
+'data' => 'getData',
+'limit' => 'getLimit',
+'total' => 'getTotal'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -117,7 +134,7 @@ class ProductList extends OffsetPaginatedResponseDto
      */
     public static function attributeMap()
     {
-        return parent::attributeMap() + self::$attributeMap;
+        return self::$attributeMap;
     }
 
     /**
@@ -127,7 +144,7 @@ class ProductList extends OffsetPaginatedResponseDto
      */
     public static function setters()
     {
-        return parent::setters() + self::$setters;
+        return self::$setters;
     }
 
     /**
@@ -137,7 +154,7 @@ class ProductList extends OffsetPaginatedResponseDto
      */
     public static function getters()
     {
-        return parent::getters() + self::$getters;
+        return self::$getters;
     }
 
     /**
@@ -152,6 +169,12 @@ class ProductList extends OffsetPaginatedResponseDto
 
     
 
+    /**
+     * Associative array for storing property values
+     *
+     * @var mixed[]
+     */
+    protected $container = [];
 
     /**
      * Constructor
@@ -161,9 +184,10 @@ class ProductList extends OffsetPaginatedResponseDto
      */
     public function __construct(array $data = null)
     {
-        parent::__construct($data);
-
+        $this->container['offset'] = isset($data['offset']) ? $data['offset'] : null;
         $this->container['data'] = isset($data['data']) ? $data['data'] : null;
+        $this->container['limit'] = isset($data['limit']) ? $data['limit'] : null;
+        $this->container['total'] = isset($data['total']) ? $data['total'] : null;
     }
 
     /**
@@ -173,7 +197,7 @@ class ProductList extends OffsetPaginatedResponseDto
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = parent::listInvalidProperties();
+        $invalidProperties = [];
 
         return $invalidProperties;
     }
@@ -191,9 +215,33 @@ class ProductList extends OffsetPaginatedResponseDto
 
 
     /**
+     * Gets offset
+     *
+     * @return int
+     */
+    public function getOffset()
+    {
+        return $this->container['offset'];
+    }
+
+    /**
+     * Sets offset
+     *
+     * @param int $offset offset
+     *
+     * @return $this
+     */
+    public function setOffset($offset)
+    {
+        $this->container['offset'] = $offset;
+
+        return $this;
+    }
+
+    /**
      * Gets data
      *
-     * @return \Emesa\PartnerPlatform\Model\ProductDto[]
+     * @return object[]
      */
     public function getData()
     {
@@ -203,13 +251,61 @@ class ProductList extends OffsetPaginatedResponseDto
     /**
      * Sets data
      *
-     * @param \Emesa\PartnerPlatform\Model\ProductDto[] $data data
+     * @param object[] $data data
      *
      * @return $this
      */
     public function setData($data)
     {
         $this->container['data'] = $data;
+
+        return $this;
+    }
+
+    /**
+     * Gets limit
+     *
+     * @return int
+     */
+    public function getLimit()
+    {
+        return $this->container['limit'];
+    }
+
+    /**
+     * Sets limit
+     *
+     * @param int $limit limit
+     *
+     * @return $this
+     */
+    public function setLimit($limit)
+    {
+        $this->container['limit'] = $limit;
+
+        return $this;
+    }
+
+    /**
+     * Gets total
+     *
+     * @return int
+     */
+    public function getTotal()
+    {
+        return $this->container['total'];
+    }
+
+    /**
+     * Sets total
+     *
+     * @param int $total total
+     *
+     * @return $this
+     */
+    public function setTotal($total)
+    {
+        $this->container['total'] = $total;
 
         return $this;
     }

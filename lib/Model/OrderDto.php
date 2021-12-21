@@ -58,6 +58,8 @@ class OrderDto implements ModelInterface, ArrayAccess
     protected static $swaggerTypes = [
         'market_order_id' => 'string',
 'total_shipping_costs_incl_vat_in_cents' => 'int',
+'customer_email' => 'string',
+'customer_phone_number' => 'string',
 'address' => '\Emesa\PartnerPlatform\Model\AddressDto',
 'delivery_instructions' => 'string',
 'lines' => '\Emesa\PartnerPlatform\Model\OrderLineDto[]',
@@ -71,6 +73,8 @@ class OrderDto implements ModelInterface, ArrayAccess
     protected static $swaggerFormats = [
         'market_order_id' => null,
 'total_shipping_costs_incl_vat_in_cents' => null,
+'customer_email' => null,
+'customer_phone_number' => null,
 'address' => null,
 'delivery_instructions' => null,
 'lines' => null,
@@ -105,6 +109,8 @@ class OrderDto implements ModelInterface, ArrayAccess
     protected static $attributeMap = [
         'market_order_id' => 'marketOrderId',
 'total_shipping_costs_incl_vat_in_cents' => 'totalShippingCostsInclVatInCents',
+'customer_email' => 'customerEmail',
+'customer_phone_number' => 'customerPhoneNumber',
 'address' => 'address',
 'delivery_instructions' => 'deliveryInstructions',
 'lines' => 'lines',
@@ -118,6 +124,8 @@ class OrderDto implements ModelInterface, ArrayAccess
     protected static $setters = [
         'market_order_id' => 'setMarketOrderId',
 'total_shipping_costs_incl_vat_in_cents' => 'setTotalShippingCostsInclVatInCents',
+'customer_email' => 'setCustomerEmail',
+'customer_phone_number' => 'setCustomerPhoneNumber',
 'address' => 'setAddress',
 'delivery_instructions' => 'setDeliveryInstructions',
 'lines' => 'setLines',
@@ -131,6 +139,8 @@ class OrderDto implements ModelInterface, ArrayAccess
     protected static $getters = [
         'market_order_id' => 'getMarketOrderId',
 'total_shipping_costs_incl_vat_in_cents' => 'getTotalShippingCostsInclVatInCents',
+'customer_email' => 'getCustomerEmail',
+'customer_phone_number' => 'getCustomerPhoneNumber',
 'address' => 'getAddress',
 'delivery_instructions' => 'getDeliveryInstructions',
 'lines' => 'getLines',
@@ -196,6 +206,8 @@ class OrderDto implements ModelInterface, ArrayAccess
     {
         $this->container['market_order_id'] = isset($data['market_order_id']) ? $data['market_order_id'] : null;
         $this->container['total_shipping_costs_incl_vat_in_cents'] = isset($data['total_shipping_costs_incl_vat_in_cents']) ? $data['total_shipping_costs_incl_vat_in_cents'] : null;
+        $this->container['customer_email'] = isset($data['customer_email']) ? $data['customer_email'] : null;
+        $this->container['customer_phone_number'] = isset($data['customer_phone_number']) ? $data['customer_phone_number'] : null;
         $this->container['address'] = isset($data['address']) ? $data['address'] : null;
         $this->container['delivery_instructions'] = isset($data['delivery_instructions']) ? $data['delivery_instructions'] : null;
         $this->container['lines'] = isset($data['lines']) ? $data['lines'] : null;
@@ -285,6 +297,54 @@ class OrderDto implements ModelInterface, ArrayAccess
     public function setTotalShippingCostsInclVatInCents($total_shipping_costs_incl_vat_in_cents)
     {
         $this->container['total_shipping_costs_incl_vat_in_cents'] = $total_shipping_costs_incl_vat_in_cents;
+
+        return $this;
+    }
+
+    /**
+     * Gets customer_email
+     *
+     * @return string
+     */
+    public function getCustomerEmail()
+    {
+        return $this->container['customer_email'];
+    }
+
+    /**
+     * Sets customer_email
+     *
+     * @param string $customer_email customer_email
+     *
+     * @return $this
+     */
+    public function setCustomerEmail($customer_email)
+    {
+        $this->container['customer_email'] = $customer_email;
+
+        return $this;
+    }
+
+    /**
+     * Gets customer_phone_number
+     *
+     * @return string
+     */
+    public function getCustomerPhoneNumber()
+    {
+        return $this->container['customer_phone_number'];
+    }
+
+    /**
+     * Sets customer_phone_number
+     *
+     * @param string $customer_phone_number customer_phone_number
+     *
+     * @return $this
+     */
+    public function setCustomerPhoneNumber($customer_phone_number)
+    {
+        $this->container['customer_phone_number'] = $customer_phone_number;
 
         return $this;
     }

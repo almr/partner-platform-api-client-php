@@ -59,7 +59,8 @@ class CategoryDto implements ModelInterface, ArrayAccess
         'market_category_id' => 'string',
 'parent_market_category_id' => 'string',
 'name' => 'string',
-'can_contain_products' => 'bool'    ];
+'can_contain_products' => 'bool',
+'commission_percentage' => 'float'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -70,7 +71,8 @@ class CategoryDto implements ModelInterface, ArrayAccess
         'market_category_id' => null,
 'parent_market_category_id' => null,
 'name' => null,
-'can_contain_products' => null    ];
+'can_contain_products' => null,
+'commission_percentage' => 'float'    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -102,7 +104,8 @@ class CategoryDto implements ModelInterface, ArrayAccess
         'market_category_id' => 'marketCategoryId',
 'parent_market_category_id' => 'parentMarketCategoryId',
 'name' => 'name',
-'can_contain_products' => 'canContainProducts'    ];
+'can_contain_products' => 'canContainProducts',
+'commission_percentage' => 'commissionPercentage'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -113,7 +116,8 @@ class CategoryDto implements ModelInterface, ArrayAccess
         'market_category_id' => 'setMarketCategoryId',
 'parent_market_category_id' => 'setParentMarketCategoryId',
 'name' => 'setName',
-'can_contain_products' => 'setCanContainProducts'    ];
+'can_contain_products' => 'setCanContainProducts',
+'commission_percentage' => 'setCommissionPercentage'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -124,7 +128,8 @@ class CategoryDto implements ModelInterface, ArrayAccess
         'market_category_id' => 'getMarketCategoryId',
 'parent_market_category_id' => 'getParentMarketCategoryId',
 'name' => 'getName',
-'can_contain_products' => 'getCanContainProducts'    ];
+'can_contain_products' => 'getCanContainProducts',
+'commission_percentage' => 'getCommissionPercentage'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -188,6 +193,7 @@ class CategoryDto implements ModelInterface, ArrayAccess
         $this->container['parent_market_category_id'] = isset($data['parent_market_category_id']) ? $data['parent_market_category_id'] : null;
         $this->container['name'] = isset($data['name']) ? $data['name'] : null;
         $this->container['can_contain_products'] = isset($data['can_contain_products']) ? $data['can_contain_products'] : null;
+        $this->container['commission_percentage'] = isset($data['commission_percentage']) ? $data['commission_percentage'] : null;
     }
 
     /**
@@ -315,6 +321,30 @@ class CategoryDto implements ModelInterface, ArrayAccess
     public function setCanContainProducts($can_contain_products)
     {
         $this->container['can_contain_products'] = $can_contain_products;
+
+        return $this;
+    }
+
+    /**
+     * Gets commission_percentage
+     *
+     * @return float
+     */
+    public function getCommissionPercentage()
+    {
+        return $this->container['commission_percentage'];
+    }
+
+    /**
+     * Sets commission_percentage
+     *
+     * @param float $commission_percentage commission_percentage
+     *
+     * @return $this
+     */
+    public function setCommissionPercentage($commission_percentage)
+    {
+        $this->container['commission_percentage'] = $commission_percentage;
 
         return $this;
     }
