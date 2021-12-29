@@ -371,15 +371,15 @@ class OrdersApi
      *
      * @param  int $limit Maximum number of entities to return (optional, default to 100)
      * @param  int $offset Skip first N items (optional, default to 0)
-     * @param  string[] $states states (optional, default to ["new"])
+     * @param  string $state state (optional)
      *
      * @throws \Emesa\PartnerPlatform\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Emesa\PartnerPlatform\Model\OrderList
      */
-    public function listOrders($limit = '100', $offset = '0', $states = '["new"]')
+    public function listOrders($limit = '100', $offset = '0', $state = null)
     {
-        list($response) = $this->listOrdersWithHttpInfo($limit, $offset, $states);
+        list($response) = $this->listOrdersWithHttpInfo($limit, $offset, $state);
         return $response;
     }
 
@@ -390,16 +390,16 @@ class OrdersApi
      *
      * @param  int $limit Maximum number of entities to return (optional, default to 100)
      * @param  int $offset Skip first N items (optional, default to 0)
-     * @param  string[] $states (optional, default to ["new"])
+     * @param  string $state (optional)
      *
      * @throws \Emesa\PartnerPlatform\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Emesa\PartnerPlatform\Model\OrderList, HTTP status code, HTTP response headers (array of strings)
      */
-    public function listOrdersWithHttpInfo($limit = '100', $offset = '0', $states = '["new"]')
+    public function listOrdersWithHttpInfo($limit = '100', $offset = '0', $state = null)
     {
         $returnType = '\Emesa\PartnerPlatform\Model\OrderList';
-        $request = $this->listOrdersRequest($limit, $offset, $states);
+        $request = $this->listOrdersRequest($limit, $offset, $state);
 
         try {
             $options = $this->createHttpClientOption();
@@ -475,14 +475,14 @@ class OrdersApi
      *
      * @param  int $limit Maximum number of entities to return (optional, default to 100)
      * @param  int $offset Skip first N items (optional, default to 0)
-     * @param  string[] $states (optional, default to ["new"])
+     * @param  string $state (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listOrdersAsync($limit = '100', $offset = '0', $states = '["new"]')
+    public function listOrdersAsync($limit = '100', $offset = '0', $state = null)
     {
-        return $this->listOrdersAsyncWithHttpInfo($limit, $offset, $states)
+        return $this->listOrdersAsyncWithHttpInfo($limit, $offset, $state)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -497,15 +497,15 @@ class OrdersApi
      *
      * @param  int $limit Maximum number of entities to return (optional, default to 100)
      * @param  int $offset Skip first N items (optional, default to 0)
-     * @param  string[] $states (optional, default to ["new"])
+     * @param  string $state (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listOrdersAsyncWithHttpInfo($limit = '100', $offset = '0', $states = '["new"]')
+    public function listOrdersAsyncWithHttpInfo($limit = '100', $offset = '0', $state = null)
     {
         $returnType = '\Emesa\PartnerPlatform\Model\OrderList';
-        $request = $this->listOrdersRequest($limit, $offset, $states);
+        $request = $this->listOrdersRequest($limit, $offset, $state);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -549,12 +549,12 @@ class OrdersApi
      *
      * @param  int $limit Maximum number of entities to return (optional, default to 100)
      * @param  int $offset Skip first N items (optional, default to 0)
-     * @param  string[] $states (optional, default to ["new"])
+     * @param  string $state (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function listOrdersRequest($limit = '100', $offset = '0', $states = '["new"]')
+    protected function listOrdersRequest($limit = '100', $offset = '0', $state = null)
     {
 
         $resourcePath = '/supplier-api/v1/orders';
@@ -573,11 +573,8 @@ class OrdersApi
             $queryParams['offset'] = ObjectSerializer::toQueryValue($offset, null);
         }
         // query params
-        if (is_array($states)) {
-            $states = ObjectSerializer::serializeCollection($states, 'multi', true);
-        }
-        if ($states !== null) {
-            $queryParams['states[]'] = ObjectSerializer::toQueryValue($states, null);
+        if ($state !== null) {
+            $queryParams['state'] = ObjectSerializer::toQueryValue($state, null);
         }
 
 

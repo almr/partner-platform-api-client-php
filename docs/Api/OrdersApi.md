@@ -65,11 +65,11 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **listOrders**
-> \Emesa\PartnerPlatform\Model\OrderList listOrders($limit, $offset, $states)
+> \Emesa\PartnerPlatform\Model\OrderList listOrders($limit, $offset, $state)
 
 List orders
 
-By default only new orders are listed, but you can also list confirmed orders by using the states filter.
+By default all orders are listed, but you can also list confirmed or new orders by using the state filter.
 
 ### Example
 ```php
@@ -90,10 +90,10 @@ $apiInstance = new Emesa\PartnerPlatform\Api\OrdersApi(
 );
 $limit = 100; // int | Maximum number of entities to return
 $offset = 0; // int | Skip first N items
-$states = array("[\"new\"]"); // string[] | 
+$state = "state_example"; // string | 
 
 try {
-    $result = $apiInstance->listOrders($limit, $offset, $states);
+    $result = $apiInstance->listOrders($limit, $offset, $state);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling OrdersApi->listOrders: ', $e->getMessage(), PHP_EOL;
@@ -107,7 +107,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **limit** | **int**| Maximum number of entities to return | [optional] [default to 100]
  **offset** | **int**| Skip first N items | [optional] [default to 0]
- **states** | [**string[]**](../Model/string.md)|  | [optional] [default to [&quot;new&quot;]]
+ **state** | **string**|  | [optional]
 
 ### Return type
 
