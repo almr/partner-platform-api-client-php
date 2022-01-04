@@ -21,6 +21,6 @@ jobs:
       - run: mv README_backup.md README.md
       - run: mv git_push_backup.sh git_push.sh
       - run: git add -- . :!SwaggerClient-php/* :!.swagger-codegen-ignore :!.swagger-codegen/*
+      - run: git commit -m"${{ github.event.client_payload.release_note }}"
       - run: git status
-      - run: ls -la
-      - run: pwd
+      - run: git log
