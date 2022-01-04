@@ -20,6 +20,8 @@ jobs:
       - run: mv composer_backup.json composer.json
       - run: mv README_backup.md README.md
       - run: mv git_push_backup.sh git_push.sh
+      - run: git config --global user.email "dmitry.semenkov@emesa.nl"
+      - run: git config --global user.name "Github action"
       - run: git add -- . :!SwaggerClient-php/* :!.swagger-codegen-ignore :!.swagger-codegen/*
       - run: git commit -m"${{ github.event.client_payload.release_note }}"
       - run: git status
