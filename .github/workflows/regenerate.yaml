@@ -6,5 +6,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Build the Docker image
-      run: echo "test123"
+    - name: Regenerate client
+      run: docker run --rm -v ${PWD}:/${PWD} swaggerapi/swagger-codegen-cli-v3:3.0.30 generate -i https://market.emesa.org/supplier-api/v1/doc.json -DinvokerPackage=Emesa\\PartnerPlatform,apiTests=false,modelTests=false,modelDocs=false --http-user-agent Emesa-Supplier-Api-Client/PHP/1.0 -l php -o ${PWD}
