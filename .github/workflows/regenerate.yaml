@@ -4,7 +4,7 @@ on:
     types: [regenerate]
 jobs:
   build:
-    name: Run swagger code gen
+    name: Generate API client
     runs-on: ubuntu-latest
     
     steps:
