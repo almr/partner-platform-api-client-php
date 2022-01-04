@@ -23,6 +23,7 @@ jobs:
       - run: git config --global user.name "Github action"
       - run: git add -- . :!SwaggerClient-php/* :!.swagger-codegen-ignore :!.swagger-codegen/*
       - run: git status
+      - run: git diff
       - run: git commit -m"${{ github.event.client_payload.release_note }}"
       - run: git log
       #- run: git push origin master
