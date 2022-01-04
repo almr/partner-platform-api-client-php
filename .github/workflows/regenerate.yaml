@@ -19,3 +19,5 @@ jobs:
       - run: mv README_backup.md README.md
       - run: mv git_push_backup.sh git_push.sh
       - run: git status
+      - run: ls -la
+      - run: pwd
