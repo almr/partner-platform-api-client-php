@@ -21,9 +21,9 @@ jobs:
       - run: mv git_push_backup.sh git_push.sh
       - run: git config --global user.email "dmitry.semenkov@emesa.nl"
       - run: git config --global user.name "Github action"
+      - run: git diff
       - run: git add -- . :!SwaggerClient-php/* :!.swagger-codegen-ignore :!.swagger-codegen/*
       - run: git status
-      - run: git diff
       - run: git commit -m"${{ github.event.client_payload.release_note }}"
       - run: git log
       #- run: git push origin master
