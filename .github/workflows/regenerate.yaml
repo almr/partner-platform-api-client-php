@@ -1,6 +1,7 @@
 name: Regenerate client
 on:
-  repository_dispatch
+  repository_dispatch:
+    types: [regenerate]
 jobs:
   build:
     runs-on: ubuntu-latest
