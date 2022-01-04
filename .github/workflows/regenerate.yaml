@@ -16,10 +16,15 @@ jobs:
       - run: cp git_push.sh git_push_backup.sh
       - run: docker run --rm -v ${PWD}:/${PWD} swaggerapi/swagger-codegen-cli-v3:3.0.30 generate -i https://sandbox-market.emesa.org/supplier-api/v1/doc.json -DinvokerPackage=Emesa\\PartnerPlatform,apiTests=false,modelTests=false,modelDocs=false --http-user-agent Emesa-Supplier-Api-Client/PHP/1.0 -l php -o ${PWD}/
       - run: cp -a SwaggerClient-php/. ${PWD}
-      - run: rm -rf SwaggerClient-php .swagger-codegen-ignore .swagger-codegen/
+      #- run: rm -rf SwaggerClient-php .swagger-codegen-ignore .swagger-codegen/
       - run: mv composer_backup.json composer.json
       - run: mv README_backup.md README.md
       - run: mv git_push_backup.sh git_push.sh
       - run: git status
       - run: ls -la
       - run: pwd
+  cleanup:
+    name: cleanup
+    uses: JesseTG/rm@v1.0.2
+    with:
+      path: SwaggerClient-php
