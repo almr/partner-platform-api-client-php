@@ -20,11 +20,7 @@ jobs:
       - run: mv composer_backup.json composer.json
       - run: mv README_backup.md README.md
       - run: mv git_push_backup.sh git_push.sh
+      - run: git add -- . :!SwaggerClient-php/* :!.swagger-codegen-ignore :!.swagger-codegen/*
       - run: git status
       - run: ls -la
       - run: pwd
-  cleanup:
-    name: cleanup
-    uses: JesseTG/rm@v1.0.2
-    with:
-      path: SwaggerClient-php
