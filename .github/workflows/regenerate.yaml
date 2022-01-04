@@ -11,13 +11,14 @@ jobs:
       - uses: actions/checkout@v2
         with:
           repository: EmesaDEV/partner-platform-api-client-php
-   #   - run: cp SwaggerClient-php/composer.json SwaggerClient-php/composer_backup.json
-    #  - run: cp SwaggerClient-php/README.md SwaggerClient-php/README_backup.md
-   #   - run: cp SwaggerClient-php/git_push.sh SwaggerClient-php/git_push_backup.sh
-      - run: docker run --rm -v ${PWD}:/${PWD} swaggerapi/swagger-codegen-cli-v3:3.0.30 generate -i https://market.emesa.org/supplier-api/v1/doc.json -DinvokerPackage=Emesa\\PartnerPlatform,apiTests=false,modelTests=false,modelDocs=false --http-user-agent Emesa-Supplier-Api-Client/PHP/1.0 -l php -o /home/runner/work/partner-platform-api-client-php/partner-platform-api-client-php
-   #   - run: mv SwaggerClient-php/composer_backup.json SwaggerClient-php/composer.json
-    #  - run: mv SwaggerClient-php/README_backup.md SwaggerClient-php/README.md
-    #  - run: mv SwaggerClient-php/git_push_backup.sh SwaggerClient-php/git_push.sh
+      - run: cp composer.json composer_backup.json
+      - run: cp README.md README_backup.md
+      - run: cp git_push.sh git_push_backup.sh
+      - run: docker run --rm -v ${PWD}:/${PWD} swaggerapi/swagger-codegen-cli-v3:3.0.30 generate -i https://market.emesa.org/supplier-api/v1/doc.json -DinvokerPackage=Emesa\\PartnerPlatform,apiTests=false,modelTests=false,modelDocs=false --http-user-agent Emesa-Supplier-Api-Client/PHP/1.0 -l php -o ${PWD}/
+      - run: cp -a SwaggerClient-php/. /home/runner/work/partner-platform-api-client-php/partner-platform-api-client-php/
+      - run: mv composer_backup.json composer.json
+      - run: mv README_backup.md README.md
+      - run: mv git_push_backup.sh git_push.sh
       - run: git status
       - run: ls -la
       - run: pwd
