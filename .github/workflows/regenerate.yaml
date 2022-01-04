@@ -4,8 +4,15 @@ on:
     types: [regenerate]
 jobs:
   build:
+    name: Run swagger code gen
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Run swagger code gen
-      run: docker run --rm -v ${PWD}:/${PWD} swaggerapi/swagger-codegen-cli-v3:3.0.30 generate -i https://market.emesa.org/supplier-api/v1/doc.json -DinvokerPackage=Emesa\\PartnerPlatform,apiTests=false,modelTests=false,modelDocs=false --http-user-agent Emesa-Supplier-Api-Client/PHP/1.0 -l php -o ${PWD}
+      - uses: actions/checkout@v2
+      - run: git clone git@github.com:EmesaDEV/partner-platform-api-client-php.git SwaggerClient-php
+      - run: cp SwaggerClient-php/composer.json SwaggerClient-php/composer_backup.json
+      - run: cp SwaggerClient-php/README.md SwaggerClient-php/README_backup.md
+      - run: cp SwaggerClient-php/git_push.sh SwaggerClient-php/git_push_backup.sh
+      - run: docker run --rm -v ${PWD}:/${PWD} swaggerapi/swagger-codegen-cli-v3:3.0.30 generate -i https://market.emesa.org/supplier-api/v1/doc.json -DinvokerPackage=Emesa\\PartnerPlatform,apiTests=false,modelTests=false,modelDocs=false --http-user-agent Emesa-Supplier-Api-Client/PHP/1.0 -l php -o ${PWD}
+      - run: mv SwaggerClient-php/composer_backup.json SwaggerClient-php/composer.json
+      - run: mv SwaggerClient-php/README_backup.md SwaggerClient-php/README.md
+      - run: mv SwaggerClient-php/git_push_backup.sh SwaggerClient-php/git_push.sh
