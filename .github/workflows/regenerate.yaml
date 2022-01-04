@@ -26,5 +26,5 @@ jobs:
       - run: git status
       - run: git commit -m"${{ github.event.client_payload.release_note }}"
       - run: git log
-      #- run: git push origin master
+      - run: git push origin master
       #-run: create a tag?
