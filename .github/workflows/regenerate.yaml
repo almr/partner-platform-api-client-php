@@ -23,5 +23,5 @@ jobs:
       - run: git log
       - run: git tag "${{ github.event.client_payload.release_note }}"
       - run: git tag -n
-      - run: git push origin master
-      - run: git push origin --tags
+      #- run: git push origin master
+      #- run: git push origin --tags
