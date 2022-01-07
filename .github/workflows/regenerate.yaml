@@ -12,6 +12,7 @@ jobs:
         with:
           repository: EmesaDEV/partner-platform-api-client-php
       - run: docker run --rm -v ${PWD}:/${PWD} swaggerapi/swagger-codegen-cli-v3:3.0.30 generate -i https://market.emesa.org/supplier-api/v1/doc.json -DinvokerPackage=Emesa\\PartnerPlatform,apiTests=false,modelTests=false,modelDocs=false --http-user-agent Emesa-Supplier-Api-Client/PHP/1.0 -l php -o ${PWD}/
+      - run: chmod -R 777 SwaggerClient-php
       - run: cp SwaggerClient-php/composer.json SwaggerClient-php/composer2.json
       - run: cp composer.json SwaggerClient-php/composer.json
       - run: cp README.md SwaggerClient-php/README.md
