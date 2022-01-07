@@ -8,24 +8,26 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      #- uses: actions/checkout@v2
-        #with:
-          #repository: EmesaDEV/partner-platform-api-client-php
-      - run: mkdir -m 777 SwaggerClient-php
-      - run: docker run --rm -v ${PWD}:/${PWD} swaggerapi/swagger-codegen-cli-v3:3.0.30 generate -i https://market.emesa.org/supplier-api/v1/doc.json -DinvokerPackage=Emesa\\PartnerPlatform,apiTests=false,modelTests=false,modelDocs=false --http-user-agent Emesa-Supplier-Api-Client/PHP/1.0 -l php -o ${PWD}/
+      - uses: actions/checkout@v2
+        with:
+          repository: EmesaDEV/partner-platform-api-client-php
+      - run: date -R -d "Mar 31 08:04"
+      - run: find -not -newermt "Mar 31 08:04"
+      #- run: mkdir -m 777 SwaggerClient-php
+      #- run: docker run --rm -v ${PWD}:/${PWD} swaggerapi/swagger-codegen-cli-v3:3.0.30 generate -i https://market.emesa.org/supplier-api/v1/doc.json -DinvokerPackage=Emesa\\PartnerPlatform,apiTests=false,modelTests=false,modelDocs=false --http-user-agent Emesa-Supplier-Api-Client/PHP/1.0 -l php -o ${PWD}/
       #- run: chmod -R 777 SwaggerClient-php
-      - run: cp SwaggerClient-php/composer.json SwaggerClient-php/composer2.json
-      - run: mv composer.json SwaggerClient-php/composer.json
-      - run: mv README.md SwaggerClient-php/README.md
-      - run: mv git_push.sh SwaggerClient-php/git_push.sh
-      - run: cd SwaggerClient-php
-      - run: git init
-      - run: git remote add origin git@github.com:EmesaDEV/partner-platform-api-client-php.git
-      - run: git fetch
-      - run: git reset --soft origin/master
-      - run: git add -A
-      - run: git commit -m"${{ github.event.client_payload.release_note }}"
-      - run: git status
+      #- run: cp SwaggerClient-php/composer.json SwaggerClient-php/composer2.json
+      #- run: mv composer.json SwaggerClient-php/composer.json
+      #- run: mv README.md SwaggerClient-php/README.md
+      #- run: mv git_push.sh SwaggerClient-php/git_push.sh
+      #- run: cd SwaggerClient-php
+      #- run: git init
+      #- run: git remote add origin git@github.com:EmesaDEV/partner-platform-api-client-php.git
+      #- run: git fetch
+      #- run: git reset --soft origin/master
+      #- run: git add -A
+      #- run: git commit -m"${{ github.event.client_payload.release_note }}"
+      #- run: git status
       
       
       #- run: cp composer.json composer_backup.json
