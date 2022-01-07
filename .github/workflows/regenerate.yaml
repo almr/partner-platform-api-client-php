@@ -19,6 +19,8 @@ jobs:
       - run: cp git_push.sh git_push_backup.sh
       - run: docker run --rm -v ${PWD}:/${PWD} swaggerapi/swagger-codegen-cli-v3:3.0.30 generate -i https://market.emesa.org/supplier-api/v1/doc.json -DinvokerPackage=Emesa\\PartnerPlatform,apiTests=false,modelTests=false,modelDocs=false --http-user-agent Emesa-Supplier-Api-Client/PHP/1.0 -l php -o ${PWD}/
       - run: cp -a SwaggerClient-php/. ${PWD}
+      - run: find -not -newermt "$START_DATE_TIME"
+      - run: find -not -newermt "$START_DATE_TIME" -not -path "./git/*"
       - run: find -not -newermt "$START_DATE_TIME" -not -path "./git/*" -not -path "./github/*"
 
       #- run: mv composer_backup.json composer.json
