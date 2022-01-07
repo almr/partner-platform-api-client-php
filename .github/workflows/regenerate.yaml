@@ -12,8 +12,28 @@ jobs:
         with:
           repository: EmesaDEV/partner-platform-api-client-php
       - run: current_datetime=$(date -R)
+      - run: cp composer.json composer_backup.json
+      - run: cp README.md README_backup.md
+      - run: cp git_push.sh git_push_backup.sh
+      - run: docker run --rm -v ${PWD}:/${PWD} swaggerapi/swagger-codegen-cli-v3:3.0.30 generate -i https://market.emesa.org/supplier-api/v1/doc.json -DinvokerPackage=Emesa\\PartnerPlatform,apiTests=false,modelTests=false,modelDocs=false --http-user-agent Emesa-Supplier-Api-Client/PHP/1.0 -l php -o ${PWD}/
+      - run: cp -a SwaggerClient-php/. ${PWD}
       - run: find -not -newermt "$current_datetime"
-      #- run: mkdir -m 777 SwaggerClient-php
+      #- run: mv composer_backup.json composer.json
+      #- run: mv README_backup.md README.md
+      #- run: mv git_push_backup.sh git_push.sh
+      #- run: git config --global user.email "dmitry.semenkov@emesa.nl"
+      #- run: git config --global user.name "Github action"
+      #- run: git diff
+      #- run: git add -- . :!SwaggerClient-php/* :!.swagger-codegen-ignore :!.swagger-codegen/*
+      #- run: git status
+      #- run: git commit -m"${{ github.event.client_payload.release_note }}"
+      #- run: git log
+      #- run: git push origin master
+      #-run: create a tag?
+      
+      
+      
+            #- run: mkdir -m 777 SwaggerClient-php
       #- run: docker run --rm -v ${PWD}:/${PWD} swaggerapi/swagger-codegen-cli-v3:3.0.30 generate -i https://market.emesa.org/supplier-api/v1/doc.json -DinvokerPackage=Emesa\\PartnerPlatform,apiTests=false,modelTests=false,modelDocs=false --http-user-agent Emesa-Supplier-Api-Client/PHP/1.0 -l php -o ${PWD}/
       #- run: chmod -R 777 SwaggerClient-php
       #- run: cp SwaggerClient-php/composer.json SwaggerClient-php/composer2.json
@@ -28,22 +48,3 @@ jobs:
       #- run: git add -A
       #- run: git commit -m"${{ github.event.client_payload.release_note }}"
       #- run: git status
-      
-      
-      #- run: cp composer.json composer_backup.json
-      #- run: cp README.md README_backup.md
-      #- run: cp git_push.sh git_push_backup.sh
-      #- run: docker run --rm -v ${PWD}:/${PWD} swaggerapi/swagger-codegen-cli-v3:3.0.30 generate -i https://market.emesa.org/supplier-api/v1/doc.json -DinvokerPackage=Emesa\\PartnerPlatform,apiTests=false,modelTests=false,modelDocs=false --http-user-agent Emesa-Supplier-Api-Client/PHP/1.0 -l php -o ${PWD}/
-      #- run: cp -a SwaggerClient-php/. ${PWD}
-      #- run: mv composer_backup.json composer.json
-      #- run: mv README_backup.md README.md
-      #- run: mv git_push_backup.sh git_push.sh
-      #- run: git config --global user.email "dmitry.semenkov@emesa.nl"
-      #- run: git config --global user.name "Github action"
-      #- run: git diff
-      #- run: git add -- . :!SwaggerClient-php/* :!.swagger-codegen-ignore :!.swagger-codegen/*
-      #- run: git status
-      #- run: git commit -m"${{ github.event.client_payload.release_note }}"
-      #- run: git log
-      #- run: git push origin master
-      #-run: create a tag?
