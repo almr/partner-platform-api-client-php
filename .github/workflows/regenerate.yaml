@@ -13,12 +13,11 @@ jobs:
           repository: EmesaDEV/partner-platform-api-client-php
       - name: Set env
         run: echo "START_DATE_TIME=$(echo $(date -R))" >> $GITHUB_ENV
-      - run: sleep 5
       - run: cp composer.json composer_backup.json
       - run: cp README.md README_backup.md
       - run: cp git_push.sh git_push_backup.sh
       - run: docker run --rm -v ${PWD}:/${PWD} swaggerapi/swagger-codegen-cli-v3:3.0.30 generate -i https://market.emesa.org/supplier-api/v1/doc.json -DinvokerPackage=Emesa\\PartnerPlatform,apiTests=false,modelTests=false,modelDocs=false --http-user-agent Emesa-Supplier-Api-Client/PHP/1.0 -l php -o ${PWD}/
-      - run: cp -a SwaggerClient-php/. ${PWD} && find -not -newermt "$START_DATE_TIME" -not -path "./.git/*"
+      - run: cp -a SwaggerClient-php/. ${PWD} && sleep 5 && find -not -newermt "$START_DATE_TIME" -not -path "./.git/*"
 
       #- run: mv composer_backup.json composer.json
       #- run: mv README_backup.md README.md
