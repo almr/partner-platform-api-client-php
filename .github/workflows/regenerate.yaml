@@ -11,6 +11,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           repository: EmesaDEV/partner-platform-api-client-php
+      - run: ls -la
       - run: current_datetime=$(date -R)
       - run: cp composer.json composer_backup.json
       - run: cp README.md README_backup.md
