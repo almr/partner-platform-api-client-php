@@ -18,7 +18,7 @@ jobs:
       - run: START_DATE_TIME=$(echo $(date -R)) && echo $START_DATE_TIME
       - run: ls lib/Model/ -la --full-time\
       - run: ls -la --full-time
-      - run: echo cat filesToRemove.txt
+      - run: cat filesToRemove.txt
       #- run: mv composer_backup.json composer.json
       #- run: mv README_backup.md README.md
       #- run: mv git_push_backup.sh git_push.sh
