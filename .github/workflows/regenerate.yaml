@@ -15,11 +15,8 @@ jobs:
       - run: cp README.md README_backup.md
       - run: cp git_push.sh git_push_backup.sh
       - run: sleep 10
-      - run: current_datetime=$(date -R)
-      - run: echo "test123"
+      - run: echo "current_datetime=$(date -R)" >> current_datetime
       - run: echo $current_datetime
-      - run: echo "$current_datetime"
-      - run: echo ${$current_datetime}
       - run: ls -la --full-time
       - run: docker run --rm -v ${PWD}:/${PWD} swaggerapi/swagger-codegen-cli-v3:3.0.30 generate -i https://market.emesa.org/supplier-api/v1/doc.json -DinvokerPackage=Emesa\\PartnerPlatform,apiTests=false,modelTests=false,modelDocs=false --http-user-agent Emesa-Supplier-Api-Client/PHP/1.0 -l php -o ${PWD}/
       - run: cp -a SwaggerClient-php/. ${PWD}
