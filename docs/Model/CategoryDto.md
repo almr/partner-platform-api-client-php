@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **parent_market_category_id** | **string** |  | [optional] 
 **name** | **string** |  | 
 **can_contain_products** | **bool** |  | 
+**commission_percentage** | **float** |  | [optional] 
 
 [[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)
 

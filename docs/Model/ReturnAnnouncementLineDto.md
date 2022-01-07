@@ -1,12 +1,10 @@
-# ProductOfferDto
+# ReturnAnnouncementLineDto
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**stock** | **int** |  | 
-**target_price_in_cents** | **int** |  | 
-**market_shipping_class_id** | **string** |  | 
-**target_country_codes** | **string[]** |  | 
+**supplier_product_id** | **string** |  | 
+**quantity** | **int** |  | 
 
 [[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)
 

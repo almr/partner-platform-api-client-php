@@ -5,6 +5,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **market_order_id** | **string** |  | 
 **total_shipping_costs_incl_vat_in_cents** | **int** |  | 
+**customer_email** | **string** |  | [optional] 
+**customer_phone_number** | **string** |  | [optional] 
 **address** | [**\Emesa\PartnerPlatform\Model\AddressDto**](AddressDto.md) |  | 
 **delivery_instructions** | **string** |  | [optional] 
 **lines** | [**\Emesa\PartnerPlatform\Model\OrderLineDto[]**](OrderLineDto.md) |  | 
