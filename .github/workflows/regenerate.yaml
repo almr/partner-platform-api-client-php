@@ -12,9 +12,9 @@ jobs:
         with:
           repository: EmesaDEV/partner-platform-api-client-php
       - name: Set env
-        run: echo "GITHUB_SHA_SHORT=$(echo $GITHUB_SHA | cut -c 1-6)" >> $GITHUB_ENV   
+        run: echo "GITHUB_MY_VAR=$(echo $(date -R))" >> $GITHUB_ENV   
       - name: Test
-        run: echo $GITHUB_SHA_SHORT
+        run: echo $GITHUB_MY_VAR
       #- run: cp composer.json composer_backup.json
       #- run: cp README.md README_backup.md
       #- run: cp git_push.sh git_push_backup.sh
