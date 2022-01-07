@@ -17,7 +17,7 @@ jobs:
       - run: sleep 1 && START_DATE_TIME=$(echo $(date -R)) && docker run --rm -v ${PWD}:/${PWD} swaggerapi/swagger-codegen-cli-v3:3.0.30 generate -i https://sandbox-market.emesa.org/supplier-api/v1/doc.json -DinvokerPackage=Emesa\\PartnerPlatform,apiTests=false,modelTests=false,modelDocs=false --http-user-agent Emesa-Supplier-Api-Client/PHP/1.0 -l php -o ${PWD}/ && cp -a SwaggerClient-php/. ${PWD} && cp composer_backup.json composer.json && cp README_backup.md README.md && cp git_push_backup.sh git_push.sh && find . -not -newermt "$START_DATE_TIME" -not -path "./.git*" > filesToRemove.txt && echo $START_DATE_TIME 
       - run: ls -la --full-time
       - run: cat filesToRemove.txt
-
+      - run: cat filesToRemove.txt | xargs git rm
       #- run: git config --global user.email "dmitry.semenkov@emesa.nl"
       #- run: git config --global user.name "Github action"
       #- run: git diff
