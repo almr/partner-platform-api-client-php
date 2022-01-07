@@ -11,8 +11,8 @@ jobs:
       - uses: actions/checkout@v2
         with:
           repository: EmesaDEV/partner-platform-api-client-php
-      - run: date -R -d "Mar 31 08:04"
-      - run: find -not -newermt "Mar 31 08:04"
+      - run: current_datetime=$(date -R)
+      - run: find -not -newermt "$current_datetime"
       #- run: mkdir -m 777 SwaggerClient-php
       #- run: docker run --rm -v ${PWD}:/${PWD} swaggerapi/swagger-codegen-cli-v3:3.0.30 generate -i https://market.emesa.org/supplier-api/v1/doc.json -DinvokerPackage=Emesa\\PartnerPlatform,apiTests=false,modelTests=false,modelDocs=false --http-user-agent Emesa-Supplier-Api-Client/PHP/1.0 -l php -o ${PWD}/
       #- run: chmod -R 777 SwaggerClient-php
