@@ -21,7 +21,7 @@ To install the bindings via [Composer](http://getcomposer.org/), add the followi
   "repositories": [
     {
       "type": "git",
-      "url": "https://github.com/emesa-dev/partner-platform-api-client-php.git"
+      "url": "https://github.com/EmesaDEV/partner-platform-api-client-php.git"
     }
   ],
   "require": {
