@@ -129,7 +129,7 @@ Name | Type | Description  | Notes
 
 Confirm order received
 
-Move the order to the confirmed state. This will remove it from the list of orders with states[]=new (default filter).
+Move the order to the confirmed state. This will remove it from the list of orders with state=new.
 
 ### Example
 ```php
