@@ -13,7 +13,7 @@ jobs:
           repository: EmesaDEV/partner-platform-api-client-php
       - run: cp composer.json composer_backup.json && cp README.md README_backup.md && cp git_push.sh git_push_backup.sh
       - run: sleep 1 && START_DATE_TIME=$(echo $(date -R)) && docker run --rm -v ${PWD}:/${PWD} swaggerapi/swagger-codegen-cli-v3:3.0.30 generate -i https://market.emesa.org/supplier-api/v1/doc.json -DinvokerPackage=Emesa\\PartnerPlatform,apiTests=false,modelTests=false,modelDocs=false --http-user-agent Emesa-Supplier-Api-Client/PHP/1.0 -l php -o ${PWD}/ && cp -a SwaggerClient-php/. ${PWD} && mv composer_backup.json composer.json && mv README_backup.md README.md && mv git_push_backup.sh git_push.sh && find . -not -newermt "$START_DATE_TIME" -not -path "./.git*" -not -name "git_push.sh" -not -name "README.md" -not -name "composer.json"> filesToRemove.txt
-      - run: cat filesToRemove.txt | xargs git rm -r
+      - run: cat filesToRemove.txt | xargs git rm -r | true
       - run: git config --global user.email "dmitry.semenkov@emesa.nl"
       - run: git config --global user.name "Github action"
       - run: git diff
