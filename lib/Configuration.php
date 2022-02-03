@@ -87,7 +87,7 @@ class Configuration
      *
      * @var string
      */
-    protected $userAgent = 'Emesa-Supplier-Api-Client/PHP/1.0';
+    protected $userAgent = 'Emesa-Supplier-Api-Client/PHP/v1.1.3';
 
     /**
      * Debug switch (default set to false)
