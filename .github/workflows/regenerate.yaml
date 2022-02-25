@@ -19,9 +19,9 @@ jobs:
       - run: git diff
       - run: git add -- . :!SwaggerClient-php/* :!.swagger-codegen-ignore :!.swagger-codegen/* :!filesToRemove.txt
       - run: git status
-      - run: git commit -m"${{ github.event.client_payload.release_note }}"
+      - run: git commit -m"${{ github.event.client_payload.release_note }}" | true
       - run: git log
       - run: git tag "${{ github.event.client_payload.release_note }}"
-      - run: git tag -n
-      - run: git push origin master
-      - run: git push origin --tags
+      - run: git tag -n | true
+      - run: git push origin master | true
+      - run: git push origin --tags | true
