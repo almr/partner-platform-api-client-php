@@ -1,6 +1,6 @@
 <?php
 /**
- * WebhookDto
+ * OfferStatusExternal
  *
  * PHP version 5
  *
@@ -32,14 +32,14 @@ use \ArrayAccess;
 use \Emesa\PartnerPlatform\ObjectSerializer;
 
 /**
- * WebhookDto Class Doc Comment
+ * OfferStatusExternal Class Doc Comment
  *
  * @category Class
  * @package  Emesa\PartnerPlatform
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class WebhookDto implements ModelInterface, ArrayAccess
+class OfferStatusExternal implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -48,7 +48,7 @@ class WebhookDto implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'WebhookDto';
+    protected static $swaggerModelName = 'OfferStatusExternal';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -56,11 +56,8 @@ class WebhookDto implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'supplier_webhook_id' => 'string',
-'last_success' => '\DateTime',
-'last_failure' => '\DateTime',
-'url' => 'string',
-'type' => 'string'    ];
+        'name' => 'string',
+'value' => 'string'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -68,11 +65,8 @@ class WebhookDto implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'supplier_webhook_id' => null,
-'last_success' => 'date-time',
-'last_failure' => 'date-time',
-'url' => null,
-'type' => null    ];
+        'name' => null,
+'value' => null    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -101,11 +95,8 @@ class WebhookDto implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'supplier_webhook_id' => 'supplierWebhookId',
-'last_success' => 'lastSuccess',
-'last_failure' => 'lastFailure',
-'url' => 'url',
-'type' => 'type'    ];
+        'name' => 'name',
+'value' => 'value'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -113,11 +104,8 @@ class WebhookDto implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'supplier_webhook_id' => 'setSupplierWebhookId',
-'last_success' => 'setLastSuccess',
-'last_failure' => 'setLastFailure',
-'url' => 'setUrl',
-'type' => 'setType'    ];
+        'name' => 'setName',
+'value' => 'setValue'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -125,11 +113,8 @@ class WebhookDto implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'supplier_webhook_id' => 'getSupplierWebhookId',
-'last_success' => 'getLastSuccess',
-'last_failure' => 'getLastFailure',
-'url' => 'getUrl',
-'type' => 'getType'    ];
+        'name' => 'getName',
+'value' => 'getValue'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -172,22 +157,7 @@ class WebhookDto implements ModelInterface, ArrayAccess
         return self::$swaggerModelName;
     }
 
-    const TYPE_ORDER = 'new-order';
-const TYPE_ANNOUNCED_RETURN = 'new-announced-return';
-const TYPE_APPROVAL_RESULT = 'new-approval-result';
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getTypeAllowableValues()
-    {
-        return [
-            self::TYPE_ORDER,
-self::TYPE_ANNOUNCED_RETURN,
-self::TYPE_APPROVAL_RESULT,        ];
-    }
+    
 
     /**
      * Associative array for storing property values
@@ -204,11 +174,8 @@ self::TYPE_APPROVAL_RESULT,        ];
      */
     public function __construct(array $data = null)
     {
-        $this->container['supplier_webhook_id'] = isset($data['supplier_webhook_id']) ? $data['supplier_webhook_id'] : null;
-        $this->container['last_success'] = isset($data['last_success']) ? $data['last_success'] : null;
-        $this->container['last_failure'] = isset($data['last_failure']) ? $data['last_failure'] : null;
-        $this->container['url'] = isset($data['url']) ? $data['url'] : null;
-        $this->container['type'] = isset($data['type']) ? $data['type'] : null;
+        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
+        $this->container['value'] = isset($data['value']) ? $data['value'] : null;
     }
 
     /**
@@ -219,23 +186,6 @@ self::TYPE_APPROVAL_RESULT,        ];
     public function listInvalidProperties()
     {
         $invalidProperties = [];
-
-        if ($this->container['supplier_webhook_id'] === null) {
-            $invalidProperties[] = "'supplier_webhook_id' can't be null";
-        }
-        if ($this->container['url'] === null) {
-            $invalidProperties[] = "'url' can't be null";
-        }
-        if ($this->container['type'] === null) {
-            $invalidProperties[] = "'type' can't be null";
-        }
-        $allowedValues = $this->getTypeAllowableValues();
-        if (!is_null($this->container['type']) && !in_array($this->container['type'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value for 'type', must be one of '%s'",
-                implode("', '", $allowedValues)
-            );
-        }
 
         return $invalidProperties;
     }
@@ -253,130 +203,49 @@ self::TYPE_APPROVAL_RESULT,        ];
 
 
     /**
-     * Gets supplier_webhook_id
+     * Gets name
      *
      * @return string
      */
-    public function getSupplierWebhookId()
+    public function getName()
     {
-        return $this->container['supplier_webhook_id'];
+        return $this->container['name'];
     }
 
     /**
-     * Sets supplier_webhook_id
+     * Sets name
      *
-     * @param string $supplier_webhook_id supplier_webhook_id
+     * @param string $name name
      *
      * @return $this
      */
-    public function setSupplierWebhookId($supplier_webhook_id)
+    public function setName($name)
     {
-        $this->container['supplier_webhook_id'] = $supplier_webhook_id;
+        $this->container['name'] = $name;
 
         return $this;
     }
 
     /**
-     * Gets last_success
-     *
-     * @return \DateTime
-     */
-    public function getLastSuccess()
-    {
-        return $this->container['last_success'];
-    }
-
-    /**
-     * Sets last_success
-     *
-     * @param \DateTime $last_success last_success
-     *
-     * @return $this
-     */
-    public function setLastSuccess($last_success)
-    {
-        $this->container['last_success'] = $last_success;
-
-        return $this;
-    }
-
-    /**
-     * Gets last_failure
-     *
-     * @return \DateTime
-     */
-    public function getLastFailure()
-    {
-        return $this->container['last_failure'];
-    }
-
-    /**
-     * Sets last_failure
-     *
-     * @param \DateTime $last_failure last_failure
-     *
-     * @return $this
-     */
-    public function setLastFailure($last_failure)
-    {
-        $this->container['last_failure'] = $last_failure;
-
-        return $this;
-    }
-
-    /**
-     * Gets url
+     * Gets value
      *
      * @return string
      */
-    public function getUrl()
+    public function getValue()
     {
-        return $this->container['url'];
+        return $this->container['value'];
     }
 
     /**
-     * Sets url
+     * Sets value
      *
-     * @param string $url url
+     * @param string $value value
      *
      * @return $this
      */
-    public function setUrl($url)
+    public function setValue($value)
     {
-        $this->container['url'] = $url;
-
-        return $this;
-    }
-
-    /**
-     * Gets type
-     *
-     * @return string
-     */
-    public function getType()
-    {
-        return $this->container['type'];
-    }
-
-    /**
-     * Sets type
-     *
-     * @param string $type type
-     *
-     * @return $this
-     */
-    public function setType($type)
-    {
-        $allowedValues = $this->getTypeAllowableValues();
-        if (!in_array($type, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value for 'type', must be one of '%s'",
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
-        $this->container['type'] = $type;
+        $this->container['value'] = $value;
 
         return $this;
     }

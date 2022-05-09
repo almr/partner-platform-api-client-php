@@ -1,6 +1,6 @@
 <?php
 /**
- * WebhookDto
+ * ProductOfferRequest
  *
  * PHP version 5
  *
@@ -32,14 +32,14 @@ use \ArrayAccess;
 use \Emesa\PartnerPlatform\ObjectSerializer;
 
 /**
- * WebhookDto Class Doc Comment
+ * ProductOfferRequest Class Doc Comment
  *
  * @category Class
  * @package  Emesa\PartnerPlatform
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class WebhookDto implements ModelInterface, ArrayAccess
+class ProductOfferRequest implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -48,7 +48,7 @@ class WebhookDto implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'WebhookDto';
+    protected static $swaggerModelName = 'ProductOfferRequest';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -56,11 +56,11 @@ class WebhookDto implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'supplier_webhook_id' => 'string',
-'last_success' => '\DateTime',
-'last_failure' => '\DateTime',
-'url' => 'string',
-'type' => 'string'    ];
+        'target_price_in_cents' => 'int',
+'market_shipping_class_id' => 'string',
+'target_country_codes' => 'string[]',
+'offer_amount' => 'int',
+'stock' => 'int'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -68,11 +68,11 @@ class WebhookDto implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'supplier_webhook_id' => null,
-'last_success' => 'date-time',
-'last_failure' => 'date-time',
-'url' => null,
-'type' => null    ];
+        'target_price_in_cents' => null,
+'market_shipping_class_id' => null,
+'target_country_codes' => null,
+'offer_amount' => null,
+'stock' => null    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -101,11 +101,11 @@ class WebhookDto implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'supplier_webhook_id' => 'supplierWebhookId',
-'last_success' => 'lastSuccess',
-'last_failure' => 'lastFailure',
-'url' => 'url',
-'type' => 'type'    ];
+        'target_price_in_cents' => 'targetPriceInCents',
+'market_shipping_class_id' => 'marketShippingClassId',
+'target_country_codes' => 'targetCountryCodes',
+'offer_amount' => 'offerAmount',
+'stock' => 'stock'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -113,11 +113,11 @@ class WebhookDto implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'supplier_webhook_id' => 'setSupplierWebhookId',
-'last_success' => 'setLastSuccess',
-'last_failure' => 'setLastFailure',
-'url' => 'setUrl',
-'type' => 'setType'    ];
+        'target_price_in_cents' => 'setTargetPriceInCents',
+'market_shipping_class_id' => 'setMarketShippingClassId',
+'target_country_codes' => 'setTargetCountryCodes',
+'offer_amount' => 'setOfferAmount',
+'stock' => 'setStock'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -125,11 +125,11 @@ class WebhookDto implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'supplier_webhook_id' => 'getSupplierWebhookId',
-'last_success' => 'getLastSuccess',
-'last_failure' => 'getLastFailure',
-'url' => 'getUrl',
-'type' => 'getType'    ];
+        'target_price_in_cents' => 'getTargetPriceInCents',
+'market_shipping_class_id' => 'getMarketShippingClassId',
+'target_country_codes' => 'getTargetCountryCodes',
+'offer_amount' => 'getOfferAmount',
+'stock' => 'getStock'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -172,21 +172,42 @@ class WebhookDto implements ModelInterface, ArrayAccess
         return self::$swaggerModelName;
     }
 
-    const TYPE_ORDER = 'new-order';
-const TYPE_ANNOUNCED_RETURN = 'new-announced-return';
-const TYPE_APPROVAL_RESULT = 'new-approval-result';
+    const MARKET_SHIPPING_CLASS_ID_S = 'S';
+const MARKET_SHIPPING_CLASS_ID_M = 'M';
+const MARKET_SHIPPING_CLASS_ID_XL = 'XL';
+const MARKET_SHIPPING_CLASS_ID_SPEC_1 = 'SPEC_1';
+const MARKET_SHIPPING_CLASS_ID_SPEC_2 = 'SPEC_2';
+const MARKET_SHIPPING_CLASS_ID_SPEC_3 = 'SPEC_3';
+const TARGET_COUNTRY_CODES_BE = 'BE';
+const TARGET_COUNTRY_CODES_DE = 'DE';
+const TARGET_COUNTRY_CODES_NL = 'NL';
 
     /**
      * Gets allowable values of the enum
      *
      * @return string[]
      */
-    public function getTypeAllowableValues()
+    public function getMarketShippingClassIdAllowableValues()
     {
         return [
-            self::TYPE_ORDER,
-self::TYPE_ANNOUNCED_RETURN,
-self::TYPE_APPROVAL_RESULT,        ];
+            self::MARKET_SHIPPING_CLASS_ID_S,
+self::MARKET_SHIPPING_CLASS_ID_M,
+self::MARKET_SHIPPING_CLASS_ID_XL,
+self::MARKET_SHIPPING_CLASS_ID_SPEC_1,
+self::MARKET_SHIPPING_CLASS_ID_SPEC_2,
+self::MARKET_SHIPPING_CLASS_ID_SPEC_3,        ];
+    }
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getTargetCountryCodesAllowableValues()
+    {
+        return [
+            self::TARGET_COUNTRY_CODES_BE,
+self::TARGET_COUNTRY_CODES_DE,
+self::TARGET_COUNTRY_CODES_NL,        ];
     }
 
     /**
@@ -204,11 +225,11 @@ self::TYPE_APPROVAL_RESULT,        ];
      */
     public function __construct(array $data = null)
     {
-        $this->container['supplier_webhook_id'] = isset($data['supplier_webhook_id']) ? $data['supplier_webhook_id'] : null;
-        $this->container['last_success'] = isset($data['last_success']) ? $data['last_success'] : null;
-        $this->container['last_failure'] = isset($data['last_failure']) ? $data['last_failure'] : null;
-        $this->container['url'] = isset($data['url']) ? $data['url'] : null;
-        $this->container['type'] = isset($data['type']) ? $data['type'] : null;
+        $this->container['target_price_in_cents'] = isset($data['target_price_in_cents']) ? $data['target_price_in_cents'] : null;
+        $this->container['market_shipping_class_id'] = isset($data['market_shipping_class_id']) ? $data['market_shipping_class_id'] : null;
+        $this->container['target_country_codes'] = isset($data['target_country_codes']) ? $data['target_country_codes'] : null;
+        $this->container['offer_amount'] = isset($data['offer_amount']) ? $data['offer_amount'] : null;
+        $this->container['stock'] = isset($data['stock']) ? $data['stock'] : null;
     }
 
     /**
@@ -220,23 +241,23 @@ self::TYPE_APPROVAL_RESULT,        ];
     {
         $invalidProperties = [];
 
-        if ($this->container['supplier_webhook_id'] === null) {
-            $invalidProperties[] = "'supplier_webhook_id' can't be null";
+        if ($this->container['target_price_in_cents'] === null) {
+            $invalidProperties[] = "'target_price_in_cents' can't be null";
         }
-        if ($this->container['url'] === null) {
-            $invalidProperties[] = "'url' can't be null";
+        if ($this->container['market_shipping_class_id'] === null) {
+            $invalidProperties[] = "'market_shipping_class_id' can't be null";
         }
-        if ($this->container['type'] === null) {
-            $invalidProperties[] = "'type' can't be null";
-        }
-        $allowedValues = $this->getTypeAllowableValues();
-        if (!is_null($this->container['type']) && !in_array($this->container['type'], $allowedValues, true)) {
+        $allowedValues = $this->getMarketShippingClassIdAllowableValues();
+        if (!is_null($this->container['market_shipping_class_id']) && !in_array($this->container['market_shipping_class_id'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
-                "invalid value for 'type', must be one of '%s'",
+                "invalid value for 'market_shipping_class_id', must be one of '%s'",
                 implode("', '", $allowedValues)
             );
         }
 
+        if ($this->container['target_country_codes'] === null) {
+            $invalidProperties[] = "'target_country_codes' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -253,130 +274,139 @@ self::TYPE_APPROVAL_RESULT,        ];
 
 
     /**
-     * Gets supplier_webhook_id
+     * Gets target_price_in_cents
+     *
+     * @return int
+     */
+    public function getTargetPriceInCents()
+    {
+        return $this->container['target_price_in_cents'];
+    }
+
+    /**
+     * Sets target_price_in_cents
+     *
+     * @param int $target_price_in_cents target_price_in_cents
+     *
+     * @return $this
+     */
+    public function setTargetPriceInCents($target_price_in_cents)
+    {
+        $this->container['target_price_in_cents'] = $target_price_in_cents;
+
+        return $this;
+    }
+
+    /**
+     * Gets market_shipping_class_id
      *
      * @return string
      */
-    public function getSupplierWebhookId()
+    public function getMarketShippingClassId()
     {
-        return $this->container['supplier_webhook_id'];
+        return $this->container['market_shipping_class_id'];
     }
 
     /**
-     * Sets supplier_webhook_id
+     * Sets market_shipping_class_id
      *
-     * @param string $supplier_webhook_id supplier_webhook_id
+     * @param string $market_shipping_class_id market_shipping_class_id
      *
      * @return $this
      */
-    public function setSupplierWebhookId($supplier_webhook_id)
+    public function setMarketShippingClassId($market_shipping_class_id)
     {
-        $this->container['supplier_webhook_id'] = $supplier_webhook_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets last_success
-     *
-     * @return \DateTime
-     */
-    public function getLastSuccess()
-    {
-        return $this->container['last_success'];
-    }
-
-    /**
-     * Sets last_success
-     *
-     * @param \DateTime $last_success last_success
-     *
-     * @return $this
-     */
-    public function setLastSuccess($last_success)
-    {
-        $this->container['last_success'] = $last_success;
-
-        return $this;
-    }
-
-    /**
-     * Gets last_failure
-     *
-     * @return \DateTime
-     */
-    public function getLastFailure()
-    {
-        return $this->container['last_failure'];
-    }
-
-    /**
-     * Sets last_failure
-     *
-     * @param \DateTime $last_failure last_failure
-     *
-     * @return $this
-     */
-    public function setLastFailure($last_failure)
-    {
-        $this->container['last_failure'] = $last_failure;
-
-        return $this;
-    }
-
-    /**
-     * Gets url
-     *
-     * @return string
-     */
-    public function getUrl()
-    {
-        return $this->container['url'];
-    }
-
-    /**
-     * Sets url
-     *
-     * @param string $url url
-     *
-     * @return $this
-     */
-    public function setUrl($url)
-    {
-        $this->container['url'] = $url;
-
-        return $this;
-    }
-
-    /**
-     * Gets type
-     *
-     * @return string
-     */
-    public function getType()
-    {
-        return $this->container['type'];
-    }
-
-    /**
-     * Sets type
-     *
-     * @param string $type type
-     *
-     * @return $this
-     */
-    public function setType($type)
-    {
-        $allowedValues = $this->getTypeAllowableValues();
-        if (!in_array($type, $allowedValues, true)) {
+        $allowedValues = $this->getMarketShippingClassIdAllowableValues();
+        if (!in_array($market_shipping_class_id, $allowedValues, true)) {
             throw new \InvalidArgumentException(
                 sprintf(
-                    "Invalid value for 'type', must be one of '%s'",
+                    "Invalid value for 'market_shipping_class_id', must be one of '%s'",
                     implode("', '", $allowedValues)
                 )
             );
         }
-        $this->container['type'] = $type;
+        $this->container['market_shipping_class_id'] = $market_shipping_class_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets target_country_codes
+     *
+     * @return string[]
+     */
+    public function getTargetCountryCodes()
+    {
+        return $this->container['target_country_codes'];
+    }
+
+    /**
+     * Sets target_country_codes
+     *
+     * @param string[] $target_country_codes target_country_codes
+     *
+     * @return $this
+     */
+    public function setTargetCountryCodes($target_country_codes)
+    {
+        $allowedValues = $this->getTargetCountryCodesAllowableValues();
+        if (array_diff($target_country_codes, $allowedValues)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'target_country_codes', must be one of '%s'",
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['target_country_codes'] = $target_country_codes;
+
+        return $this;
+    }
+
+    /**
+     * Gets offer_amount
+     *
+     * @return int
+     */
+    public function getOfferAmount()
+    {
+        return $this->container['offer_amount'];
+    }
+
+    /**
+     * Sets offer_amount
+     *
+     * @param int $offer_amount offer_amount
+     *
+     * @return $this
+     */
+    public function setOfferAmount($offer_amount)
+    {
+        $this->container['offer_amount'] = $offer_amount;
+
+        return $this;
+    }
+
+    /**
+     * Gets stock
+     *
+     * @return int
+     */
+    public function getStock()
+    {
+        return $this->container['stock'];
+    }
+
+    /**
+     * Sets stock
+     *
+     * @param int $stock stock
+     *
+     * @return $this
+     */
+    public function setStock($stock)
+    {
+        $this->container['stock'] = $stock;
 
         return $this;
     }

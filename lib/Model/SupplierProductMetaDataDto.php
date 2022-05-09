@@ -1,6 +1,6 @@
 <?php
 /**
- * WebhookDto
+ * SupplierProductMetaDataDto
  *
  * PHP version 5
  *
@@ -32,14 +32,14 @@ use \ArrayAccess;
 use \Emesa\PartnerPlatform\ObjectSerializer;
 
 /**
- * WebhookDto Class Doc Comment
+ * SupplierProductMetaDataDto Class Doc Comment
  *
  * @category Class
  * @package  Emesa\PartnerPlatform
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class WebhookDto implements ModelInterface, ArrayAccess
+class SupplierProductMetaDataDto implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -48,7 +48,7 @@ class WebhookDto implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'WebhookDto';
+    protected static $swaggerModelName = 'SupplierProductMetaDataDto';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -56,11 +56,9 @@ class WebhookDto implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'supplier_webhook_id' => 'string',
-'last_success' => '\DateTime',
-'last_failure' => '\DateTime',
-'url' => 'string',
-'type' => 'string'    ];
+        'offer_amount' => 'int',
+'reserved_amount' => 'int',
+'shipped_amount' => 'int'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -68,11 +66,9 @@ class WebhookDto implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'supplier_webhook_id' => null,
-'last_success' => 'date-time',
-'last_failure' => 'date-time',
-'url' => null,
-'type' => null    ];
+        'offer_amount' => null,
+'reserved_amount' => null,
+'shipped_amount' => null    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -101,11 +97,9 @@ class WebhookDto implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'supplier_webhook_id' => 'supplierWebhookId',
-'last_success' => 'lastSuccess',
-'last_failure' => 'lastFailure',
-'url' => 'url',
-'type' => 'type'    ];
+        'offer_amount' => 'offerAmount',
+'reserved_amount' => 'reservedAmount',
+'shipped_amount' => 'shippedAmount'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -113,11 +107,9 @@ class WebhookDto implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'supplier_webhook_id' => 'setSupplierWebhookId',
-'last_success' => 'setLastSuccess',
-'last_failure' => 'setLastFailure',
-'url' => 'setUrl',
-'type' => 'setType'    ];
+        'offer_amount' => 'setOfferAmount',
+'reserved_amount' => 'setReservedAmount',
+'shipped_amount' => 'setShippedAmount'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -125,11 +117,9 @@ class WebhookDto implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'supplier_webhook_id' => 'getSupplierWebhookId',
-'last_success' => 'getLastSuccess',
-'last_failure' => 'getLastFailure',
-'url' => 'getUrl',
-'type' => 'getType'    ];
+        'offer_amount' => 'getOfferAmount',
+'reserved_amount' => 'getReservedAmount',
+'shipped_amount' => 'getShippedAmount'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -172,22 +162,7 @@ class WebhookDto implements ModelInterface, ArrayAccess
         return self::$swaggerModelName;
     }
 
-    const TYPE_ORDER = 'new-order';
-const TYPE_ANNOUNCED_RETURN = 'new-announced-return';
-const TYPE_APPROVAL_RESULT = 'new-approval-result';
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getTypeAllowableValues()
-    {
-        return [
-            self::TYPE_ORDER,
-self::TYPE_ANNOUNCED_RETURN,
-self::TYPE_APPROVAL_RESULT,        ];
-    }
+    
 
     /**
      * Associative array for storing property values
@@ -204,11 +179,9 @@ self::TYPE_APPROVAL_RESULT,        ];
      */
     public function __construct(array $data = null)
     {
-        $this->container['supplier_webhook_id'] = isset($data['supplier_webhook_id']) ? $data['supplier_webhook_id'] : null;
-        $this->container['last_success'] = isset($data['last_success']) ? $data['last_success'] : null;
-        $this->container['last_failure'] = isset($data['last_failure']) ? $data['last_failure'] : null;
-        $this->container['url'] = isset($data['url']) ? $data['url'] : null;
-        $this->container['type'] = isset($data['type']) ? $data['type'] : null;
+        $this->container['offer_amount'] = isset($data['offer_amount']) ? $data['offer_amount'] : null;
+        $this->container['reserved_amount'] = isset($data['reserved_amount']) ? $data['reserved_amount'] : null;
+        $this->container['shipped_amount'] = isset($data['shipped_amount']) ? $data['shipped_amount'] : null;
     }
 
     /**
@@ -219,23 +192,6 @@ self::TYPE_APPROVAL_RESULT,        ];
     public function listInvalidProperties()
     {
         $invalidProperties = [];
-
-        if ($this->container['supplier_webhook_id'] === null) {
-            $invalidProperties[] = "'supplier_webhook_id' can't be null";
-        }
-        if ($this->container['url'] === null) {
-            $invalidProperties[] = "'url' can't be null";
-        }
-        if ($this->container['type'] === null) {
-            $invalidProperties[] = "'type' can't be null";
-        }
-        $allowedValues = $this->getTypeAllowableValues();
-        if (!is_null($this->container['type']) && !in_array($this->container['type'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value for 'type', must be one of '%s'",
-                implode("', '", $allowedValues)
-            );
-        }
 
         return $invalidProperties;
     }
@@ -253,130 +209,73 @@ self::TYPE_APPROVAL_RESULT,        ];
 
 
     /**
-     * Gets supplier_webhook_id
+     * Gets offer_amount
      *
-     * @return string
+     * @return int
      */
-    public function getSupplierWebhookId()
+    public function getOfferAmount()
     {
-        return $this->container['supplier_webhook_id'];
+        return $this->container['offer_amount'];
     }
 
     /**
-     * Sets supplier_webhook_id
+     * Sets offer_amount
      *
-     * @param string $supplier_webhook_id supplier_webhook_id
+     * @param int $offer_amount offer_amount
      *
      * @return $this
      */
-    public function setSupplierWebhookId($supplier_webhook_id)
+    public function setOfferAmount($offer_amount)
     {
-        $this->container['supplier_webhook_id'] = $supplier_webhook_id;
+        $this->container['offer_amount'] = $offer_amount;
 
         return $this;
     }
 
     /**
-     * Gets last_success
+     * Gets reserved_amount
      *
-     * @return \DateTime
+     * @return int
      */
-    public function getLastSuccess()
+    public function getReservedAmount()
     {
-        return $this->container['last_success'];
+        return $this->container['reserved_amount'];
     }
 
     /**
-     * Sets last_success
+     * Sets reserved_amount
      *
-     * @param \DateTime $last_success last_success
+     * @param int $reserved_amount reserved_amount
      *
      * @return $this
      */
-    public function setLastSuccess($last_success)
+    public function setReservedAmount($reserved_amount)
     {
-        $this->container['last_success'] = $last_success;
+        $this->container['reserved_amount'] = $reserved_amount;
 
         return $this;
     }
 
     /**
-     * Gets last_failure
+     * Gets shipped_amount
      *
-     * @return \DateTime
+     * @return int
      */
-    public function getLastFailure()
+    public function getShippedAmount()
     {
-        return $this->container['last_failure'];
+        return $this->container['shipped_amount'];
     }
 
     /**
-     * Sets last_failure
+     * Sets shipped_amount
      *
-     * @param \DateTime $last_failure last_failure
+     * @param int $shipped_amount shipped_amount
      *
      * @return $this
      */
-    public function setLastFailure($last_failure)
+    public function setShippedAmount($shipped_amount)
     {
-        $this->container['last_failure'] = $last_failure;
-
-        return $this;
-    }
-
-    /**
-     * Gets url
-     *
-     * @return string
-     */
-    public function getUrl()
-    {
-        return $this->container['url'];
-    }
-
-    /**
-     * Sets url
-     *
-     * @param string $url url
-     *
-     * @return $this
-     */
-    public function setUrl($url)
-    {
-        $this->container['url'] = $url;
-
-        return $this;
-    }
-
-    /**
-     * Gets type
-     *
-     * @return string
-     */
-    public function getType()
-    {
-        return $this->container['type'];
-    }
-
-    /**
-     * Sets type
-     *
-     * @param string $type type
-     *
-     * @return $this
-     */
-    public function setType($type)
-    {
-        $allowedValues = $this->getTypeAllowableValues();
-        if (!in_array($type, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value for 'type', must be one of '%s'",
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
-        $this->container['type'] = $type;
+        $this->container['shipped_amount'] = $shipped_amount;
 
         return $this;
     }

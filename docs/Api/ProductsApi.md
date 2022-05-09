@@ -12,7 +12,7 @@ Method | HTTP request | Description
 [**stopOffer**](ProductsApi.md#stopoffer) | **POST** /supplier-api/v1/products/{supplierProductId}/offer/stop | Stop current offer for a product
 
 # **getOffer**
-> \Emesa\PartnerPlatform\Model\ProductOfferDto getOffer($supplier_product_id)
+> \Emesa\PartnerPlatform\Model\ProductOfferResponseDto getOffer($supplier_product_id)
 
 Get current offer for a product
 
@@ -52,7 +52,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Emesa\PartnerPlatform\Model\ProductOfferDto**](../Model/ProductOfferDto.md)
+[**\Emesa\PartnerPlatform\Model\ProductOfferResponseDto**](../Model/ProductOfferResponseDto.md)
 
 ### Authorization
 
@@ -204,7 +204,7 @@ $apiInstance = new Emesa\PartnerPlatform\Api\ProductsApi(
     $config
 );
 $supplier_product_id = "supplier_product_id_example"; // string | 
-$body = new \Emesa\PartnerPlatform\Model\ProductOfferDto(); // \Emesa\PartnerPlatform\Model\ProductOfferDto | Input data
+$body = new \Emesa\PartnerPlatform\Model\ProductOfferRequest(); // \Emesa\PartnerPlatform\Model\ProductOfferRequest | Input data
 
 try {
     $apiInstance->putOffer($supplier_product_id, $body);
@@ -219,7 +219,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **supplier_product_id** | **string**|  |
- **body** | [**\Emesa\PartnerPlatform\Model\ProductOfferDto**](../Model/ProductOfferDto.md)| Input data | [optional]
+ **body** | [**\Emesa\PartnerPlatform\Model\ProductOfferRequest**](../Model/ProductOfferRequest.md)| Input data | [optional]
 
 ### Return type
 
