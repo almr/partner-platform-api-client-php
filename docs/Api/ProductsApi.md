@@ -184,7 +184,7 @@ Name | Type | Description  | Notes
 
 Create or update an offer on a product
 
-If an offer for this product already exists, it is updated.
+<div>If an offer for this product already exists, it is updated.<br><br/>OfferAmount is the maximum cumulative number of orders that a supplier can receive for this product. Currently approved cumulative offer amount is located in the nested meta object together with the amount of shipped and reserved items.<br><br/> Example:<br><br/><ul><li>A new offer is created with offerAmount = 10</li><li>5 items are sold, 3 of which are shipped and 2 are reserved. It means the offerAmount value cannot go below 5 anymore.</li><li>To increase the offerAmount by 5, you take the old offerAmount (10) and add the increase value (5) = 15.</li><li>The increase should first go through the approval process.</li><li>No approval needed for decrease, but it should not be lower than shipped + reserved</li></ul></div>
 
 ### Example
 ```php
