@@ -13,7 +13,7 @@ jobs:
       - name: Compare version numbers
         id: compare
         run: |
-          remote_tag=$(curl https://market.emesa.org/supplier-api/v1/doc.json | jq -r '.info.version')
+          remote_tag=v$(curl https://market.emesa.org/supplier-api/v1/doc.json | jq -r '.info.version')
           echo "remote_tag=$remote_tag"
           echo "remote_tag=$remote_tag" >> $GITHUB_OUTPUT
           local_tag=$(curl https://api.github.com/repos/EmesaDEV/partner-platform-api-client-php/tags?per_page=1 | jq -r .[].name)
@@ -22,7 +22,7 @@ jobs:
       - name: Generate library if versions changed
         if: steps.compare.outputs.local_tag < steps.compare.outputs.remote_tag
         env:
-          VERSION: v${{ steps.compare.outputs.remote_tag }}
+          VERSION: ${{ steps.compare.outputs.remote_tag }}
         run: |
           echo "Generate client for version: $VERSION"
           cp composer.json composer_backup.json && cp README.md README_backup.md && cp git_push.sh git_push_backup.sh
