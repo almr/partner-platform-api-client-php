@@ -1,27 +1,41 @@
-name: Regenerate client
+name: Generate client library when needed
 on:
-  repository_dispatch:
-    types: [regenerate]
+  workflow_dispatch:
+  schedule:
+    # Runs "At 09:00 on every day-of-week from Sunday through Friday." (see https://crontab.guru)
+    - cron: '0 9 * * 0-5'
 jobs:
   build:
     name: Generate API client
-    runs-on: ubuntu-latest
-    
+    runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v2
-        with:
-          repository: EmesaDEV/partner-platform-api-client-php
-      - run: cp composer.json composer_backup.json && cp README.md README_backup.md && cp git_push.sh git_push_backup.sh
-      - run: sleep 1 && START_DATE_TIME=$(echo $(date -R)) && docker run --rm -v ${PWD}:/${PWD} swaggerapi/swagger-codegen-cli-v3:3.0.30 generate -i https://market.emesa.org/supplier-api/v1/doc.json -DinvokerPackage=Emesa\\PartnerPlatform,apiTests=false,modelTests=false,modelDocs=false --http-user-agent Emesa-Supplier-Api-Client/PHP/${{ github.event.client_payload.release_note }} -l php -o ${PWD}/ && cp -a SwaggerClient-php/. ${PWD} && mv composer_backup.json composer.json && mv README_backup.md README.md && mv git_push_backup.sh git_push.sh && find . -not -newermt "$START_DATE_TIME" -not -path "./.git*" -not -name "git_push.sh" -not -name "README.md" -not -name "composer.json"> filesToRemove.txt
-      - run: cat filesToRemove.txt | xargs git rm -r | true
-      - run: git config --global user.email "dmitry.semenkov@emesa.nl"
-      - run: git config --global user.name "Github action"
-      - run: git diff
-      - run: git add -- . :!SwaggerClient-php/* :!.swagger-codegen-ignore :!.swagger-codegen/* :!filesToRemove.txt
-      - run: git status
-      - run: git commit -m"${{ github.event.client_payload.release_note }}" | true
-      - run: git log
-      - run: git tag "${{ github.event.client_payload.release_note }}"
-      - run: git tag -n | true
-      - run: git push origin master | true
-      - run: git push origin --tags | true
+      - uses: actions/checkout@v3
+      - name: Compare version numbers
+        id: compare
+        run: |
+          remote_tag=$(curl https://market.emesa.org/supplier-api/v1/doc.json | jq -r '.info.version')
+          echo "remote_tag=$remote_tag"
+          echo "remote_tag=$remote_tag" >> $GITHUB_OUTPUT
+          local_tag=$(curl https://api.github.com/repos/EmesaDEV/partner-platform-api-client-php/tags?per_page=1 | jq -r .[].name)
+          echo "local_tag=$local_tag"
+          echo "local_tag=$local_tag" >> $GITHUB_OUTPUT
+      - name: Generate library if versions changed
+        if: steps.compare.outputs.local_tag < steps.compare.outputs.remote_tag
+        env:
+          VERSION: v${{ steps.compare.outputs.remote_tag }}
+        run: |
+          echo "Generate client for version: $VERSION"
+          cp composer.json composer_backup.json && cp README.md README_backup.md && cp git_push.sh git_push_backup.sh
+          sleep 1 && START_DATE_TIME=$(echo $(date -R)) && docker run --rm -v ${PWD}:/${PWD} swaggerapi/swagger-codegen-cli-v3:3.0.30 generate -i https://market.emesa.org/supplier-api/v1/doc.json -DinvokerPackage=Emesa\\PartnerPlatform,apiTests=false,modelTests=false,modelDocs=false --http-user-agent Emesa-Supplier-Api-Client/PHP/$VERSION -l php -o ${PWD}/ && cp -a SwaggerClient-php/. ${PWD} && mv composer_backup.json composer.json && mv README_backup.md README.md && mv git_push_backup.sh git_push.sh && find . -not -newermt "$START_DATE_TIME" -not -path "./.git*" -not -name "git_push.sh" -not -name "README.md" -not -name "composer.json"> filesToRemove.txt
+          cat filesToRemove.txt | xargs git rm -r | true
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git diff
+          git add -- . :!SwaggerClient-php/* :!.swagger-codegen-ignore :!.swagger-codegen/* :!filesToRemove.txt
+          git status
+          git commit -m "Automatically generated client library $VERSION" | true
+          git log
+          git tag "$VERSION"
+          git tag -n | true
+          git push origin master | true
+          git push origin --tags | true
