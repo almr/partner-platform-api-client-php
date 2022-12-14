@@ -294,7 +294,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **stopOffer**
-> stopOffer($supplier_product_id)
+> stopOffer($supplier_product_id, $body)
 
 Stop current offer for a product
 
@@ -316,9 +316,10 @@ $apiInstance = new Emesa\PartnerPlatform\Api\ProductsApi(
     $config
 );
 $supplier_product_id = "supplier_product_id_example"; // string | 
+$body = new \Emesa\PartnerPlatform\Model\StopSupplierProductOfferRequest(); // \Emesa\PartnerPlatform\Model\StopSupplierProductOfferRequest | Input data
 
 try {
-    $apiInstance->stopOffer($supplier_product_id);
+    $apiInstance->stopOffer($supplier_product_id, $body);
 } catch (Exception $e) {
     echo 'Exception when calling ProductsApi->stopOffer: ', $e->getMessage(), PHP_EOL;
 }
@@ -330,6 +331,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **supplier_product_id** | **string**|  |
+ **body** | [**\Emesa\PartnerPlatform\Model\StopSupplierProductOfferRequest**](../Model/StopSupplierProductOfferRequest.md)| Input data | [optional]
 
 ### Return type
 
@@ -341,7 +343,7 @@ void (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)

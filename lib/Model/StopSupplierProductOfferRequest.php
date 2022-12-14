@@ -1,6 +1,6 @@
 <?php
 /**
- * PutWebhookRequest
+ * StopSupplierProductOfferRequest
  *
  * PHP version 5
  *
@@ -32,14 +32,14 @@ use \ArrayAccess;
 use \Emesa\PartnerPlatform\ObjectSerializer;
 
 /**
- * PutWebhookRequest Class Doc Comment
+ * StopSupplierProductOfferRequest Class Doc Comment
  *
  * @category Class
  * @package  Emesa\PartnerPlatform
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class PutWebhookRequest implements ModelInterface, ArrayAccess
+class StopSupplierProductOfferRequest implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -48,7 +48,7 @@ class PutWebhookRequest implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'PutWebhookRequest';
+    protected static $swaggerModelName = 'StopSupplierProductOfferRequest';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -56,8 +56,7 @@ class PutWebhookRequest implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'url' => 'string',
-'type' => 'string'    ];
+        'reason' => 'string'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -65,8 +64,7 @@ class PutWebhookRequest implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'url' => null,
-'type' => null    ];
+        'reason' => null    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -95,8 +93,7 @@ class PutWebhookRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'url' => 'url',
-'type' => 'type'    ];
+        'reason' => 'reason'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -104,8 +101,7 @@ class PutWebhookRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'url' => 'setUrl',
-'type' => 'setType'    ];
+        'reason' => 'setReason'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -113,8 +109,7 @@ class PutWebhookRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'url' => 'getUrl',
-'type' => 'getType'    ];
+        'reason' => 'getReason'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -157,21 +152,19 @@ class PutWebhookRequest implements ModelInterface, ArrayAccess
         return self::$swaggerModelName;
     }
 
-    const TYPE_ORDER = 'new-order';
-const TYPE_ANNOUNCED_RETURN = 'new-announced-return';
-const TYPE_APPROVAL_RESULT = 'new-approval-result';
+    const REASON_TARGET_PRICE_NOT_REACHED = 'TARGET_PRICE_NOT_REACHED';
+const REASON_STOCK_RELATED = 'STOCK_RELATED';
 
     /**
      * Gets allowable values of the enum
      *
      * @return string[]
      */
-    public function getTypeAllowableValues()
+    public function getReasonAllowableValues()
     {
         return [
-            self::TYPE_ORDER,
-self::TYPE_ANNOUNCED_RETURN,
-self::TYPE_APPROVAL_RESULT,        ];
+            self::REASON_TARGET_PRICE_NOT_REACHED,
+self::REASON_STOCK_RELATED,        ];
     }
 
     /**
@@ -189,8 +182,7 @@ self::TYPE_APPROVAL_RESULT,        ];
      */
     public function __construct(array $data = null)
     {
-        $this->container['url'] = isset($data['url']) ? $data['url'] : null;
-        $this->container['type'] = isset($data['type']) ? $data['type'] : null;
+        $this->container['reason'] = isset($data['reason']) ? $data['reason'] : null;
     }
 
     /**
@@ -202,16 +194,10 @@ self::TYPE_APPROVAL_RESULT,        ];
     {
         $invalidProperties = [];
 
-        if ($this->container['url'] === null) {
-            $invalidProperties[] = "'url' can't be null";
-        }
-        if ($this->container['type'] === null) {
-            $invalidProperties[] = "'type' can't be null";
-        }
-        $allowedValues = $this->getTypeAllowableValues();
-        if (!is_null($this->container['type']) && !in_array($this->container['type'], $allowedValues, true)) {
+        $allowedValues = $this->getReasonAllowableValues();
+        if (!is_null($this->container['reason']) && !in_array($this->container['reason'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
-                "invalid value for 'type', must be one of '%s'",
+                "invalid value for 'reason', must be one of '%s'",
                 implode("', '", $allowedValues)
             );
         }
@@ -232,58 +218,34 @@ self::TYPE_APPROVAL_RESULT,        ];
 
 
     /**
-     * Gets url
+     * Gets reason
      *
      * @return string
      */
-    public function getUrl()
+    public function getReason()
     {
-        return $this->container['url'];
+        return $this->container['reason'];
     }
 
     /**
-     * Sets url
+     * Sets reason
      *
-     * @param string $url url
+     * @param string $reason A reason for stopping the offer
      *
      * @return $this
      */
-    public function setUrl($url)
+    public function setReason($reason)
     {
-        $this->container['url'] = $url;
-
-        return $this;
-    }
-
-    /**
-     * Gets type
-     *
-     * @return string
-     */
-    public function getType()
-    {
-        return $this->container['type'];
-    }
-
-    /**
-     * Sets type
-     *
-     * @param string $type type
-     *
-     * @return $this
-     */
-    public function setType($type)
-    {
-        $allowedValues = $this->getTypeAllowableValues();
-        if (!in_array($type, $allowedValues, true)) {
+        $allowedValues = $this->getReasonAllowableValues();
+        if (!is_null($reason) && !in_array($reason, $allowedValues, true)) {
             throw new \InvalidArgumentException(
                 sprintf(
-                    "Invalid value for 'type', must be one of '%s'",
+                    "Invalid value for 'reason', must be one of '%s'",
                     implode("', '", $allowedValues)
                 )
             );
         }
-        $this->container['type'] = $type;
+        $this->container['reason'] = $reason;
 
         return $this;
     }
